@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
 <title>⟦Alerta Chirimacha · Reporta una chirimacha (borrador)||Alerta Chirimacha · Report a chirimacha (draft)⟧</title>
-<meta name="description" content="⟦¿Encontraste una chirimacha en Arequipa? Tómale una foto y envíala por WhatsApp a Alerta Chirimacha. Mira los reportes por distrito.||Found a chirimacha in Arequipa? Take a photo and send it to Alerta Chirimacha on WhatsApp. See reports by district.⟧">
+<meta name="description" content="⟦¿Encontraste una chirimacha en Arequipa? Tómale una foto y envíala por WhatsApp a Alerta Chirimacha. Mira los reportes por distrito en el mapa.||Found a chirimacha in Arequipa? Take a photo and send it to Alerta Chirimacha on WhatsApp. See reports by district on the map.⟧">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&display=swap">
 <style>
 /* Palette taken from the Alerta Chirimacha Facebook alerts (team request: keep their colors). Spanish is the page's main language; English is the toggle. */
 :root{
@@ -22,6 +22,7 @@
 }
 html[data-lang="en"] .es{display:none!important}
 html:not([data-lang="en"]) .en{display:none!important}
+[hidden]{display:none!important}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:70px}
 @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{transition:none!important} }
@@ -36,12 +37,12 @@ p{margin:0}
 .skip{position:absolute;left:-999px;top:8px;background:var(--brown);color:#fff;padding:8px 14px;border-radius:8px;z-index:100}
 .skip:focus{left:12px}
 .nw{white-space:nowrap}
-.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .tbc{background:none;color:inherit;border-bottom:2px dotted var(--orange);padding:0}
 .tbc::after{content:"por confirmar";font:700 .62rem/1 var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--orange);border-radius:4px;padding:.25em .45em;margin-left:.45em;vertical-align:.2em;white-space:nowrap}
 html[data-lang="en"] .tbc::after{content:"to confirm"}
 section{padding-block:clamp(56px,9vw,104px)}
 .kicker{display:inline-block;font:800 .8rem/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--magenta);margin-bottom:14px}
+.src{display:block;font-size:.8rem;opacity:.8;margin-top:4px}
 
 /* draft banner */
 .draft{background:var(--brown);color:var(--yellow);font-size:.86rem}
@@ -56,12 +57,12 @@ section{padding-block:clamp(56px,9vw,104px)}
 .top nav{margin-left:auto;min-width:0}
 .top nav ul{list-style:none;display:flex;gap:2px;margin:0;padding:0;overflow-x:auto;scrollbar-width:none}
 .top nav ul::-webkit-scrollbar{display:none}
-.top nav a{display:block;padding:.5em .8em;border-radius:999px;text-decoration:none;font-weight:700;font-size:.92rem;color:var(--muted);white-space:nowrap}
+.top nav a{display:block;padding:.5em .75em;border-radius:999px;text-decoration:none;font-weight:700;font-size:.9rem;color:var(--muted);white-space:nowrap}
 .top nav a:hover{color:var(--brown);background:var(--cream)}
 .lang{display:flex;flex:none;border:2px solid var(--brown);border-radius:999px;padding:2px}
 .lang button{font:800 .74rem/1 var(--f-body);letter-spacing:.08em;border:0;background:none;color:var(--brown);padding:.5em .7em;border-radius:999px;cursor:pointer}
 .lang button[aria-pressed="true"]{background:var(--brown);color:var(--yellow)}
-@media (max-width:820px){ .top nav{display:none} .lang{margin-left:auto} }
+@media (max-width:900px){ .top nav{display:none} .lang{margin-left:auto} }
 
 /* buttons */
 .btn{display:inline-flex;align-items:center;gap:.6em;font:800 1.05rem/1 var(--f-body);text-decoration:none;border-radius:999px;padding:1em 1.5em;border:0;cursor:pointer;transition:transform .15s}
@@ -73,7 +74,7 @@ section{padding-block:clamp(56px,9vw,104px)}
 
 /* hero */
 .hero{background:var(--yellow);position:relative;overflow:hidden;padding-block:clamp(40px,7vw,84px) clamp(48px,7vw,88px)}
-.hero .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(20px,4vw,56px);align-items:center}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(20px,4vw,56px);align-items:center}
 .alerta{display:inline-block;background:var(--red);color:#fff;font:800 clamp(1.6rem,4vw,2.2rem)/1 var(--f-head);padding:.22em .45em .12em;border-radius:6px;transform:rotate(-2deg);margin-bottom:18px}
 .hero h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:800;color:var(--brown)}
 .hero h1 .hl{background:var(--brown);color:var(--yellow);padding:0 .18em;border-radius:6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
@@ -83,9 +84,13 @@ section{padding-block:clamp(56px,9vw,104px)}
 .num small{display:block;font:700 .72rem/1.3 var(--f-body);letter-spacing:.1em;text-transform:uppercase;color:var(--brown);opacity:.75}
 .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
 .pills>span{background:rgba(255,255,255,.55);border:1.5px solid rgba(61,37,17,.25);color:var(--brown);font-weight:700;font-size:.86rem;border-radius:999px;padding:.35em .85em}
-.bugart{width:100%;max-width:340px;height:auto;display:block;margin:0 auto;filter:drop-shadow(0 18px 18px rgba(61,37,17,.22))}
-.artcap{text-align:center;font-size:.76rem;font-weight:700;color:var(--brown);opacity:.7;margin-top:6px}
-@media (max-width:760px){ .hero .wrap{grid-template-columns:1fr} .hero .art{order:-1} .bugart{max-width:180px} }
+/* photo: cropped from the team's April 2026 Facebook alert; the red tag covers a spot where the poster's text crossed one leg */
+.ph{position:relative}
+.ph img{display:block;width:100%;height:auto;border-radius:4px}
+.ph .tag{position:absolute;left:61.5%;top:47.2%;height:9%;right:-10%;display:flex;align-items:center;padding:0 .65em;background:var(--red);color:#fff;font:800 clamp(.7rem,1.6vw,.95rem)/1 var(--f-head);border-radius:6px;transform:rotate(-2deg);white-space:nowrap;box-shadow:0 3px 0 rgba(61,37,17,.22)}
+.photo{margin:0 auto;width:min(100%,320px);background:#fff;padding:10px 10px 0;border-radius:10px;box-shadow:0 18px 30px rgba(61,37,17,.25);transform:rotate(2deg)}
+.photo figcaption{font-size:.8rem;font-weight:700;color:var(--muted);padding:9px 2px 11px;text-align:center}
+@media (max-width:760px){ .hero .wrap{grid-template-columns:1fr} .hero .art{order:-1} .photo{width:min(46%,175px)} }
 
 /* steps */
 .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:34px;list-style:none;padding:0}
@@ -95,83 +100,161 @@ section{padding-block:clamp(56px,9vw,104px)}
 .steps .ico{height:56px;display:flex;align-items:flex-end;margin-bottom:12px}
 .steps p{font-size:1.04rem}
 .steps b{color:var(--brown)}
-.next{margin-top:22px;background:var(--paper);border:2px solid var(--brown);border-radius:18px;padding:18px 22px;font-size:1.02rem}
+.squish{margin-top:18px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:start;background:#FDECE8;border-radius:18px;padding:16px 20px;font-size:1rem}
+.squish b{color:var(--red)}
+.next{margin-top:14px;background:var(--paper);border:2px solid var(--brown);border-radius:18px;padding:18px 22px;font-size:1.02rem}
 .fact{margin-top:18px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center;background:var(--magenta);color:#fff;border-radius:18px;padding:18px 22px}
-.fact .big{font:800 2.4rem/1 var(--f-head);color:var(--yellow)}
-.fact .src{display:block;font-size:.8rem;opacity:.8;margin-top:4px}
+.fact .big{font:800 2.4rem/1 var(--f-head);color:var(--yellow);white-space:nowrap}
+.srcline{font-size:.8rem;color:var(--muted);margin-top:12px}
+.srcline a{font-weight:700}
 @media (max-width:760px){ .steps{grid-template-columns:1fr;gap:26px} }
 
-/* what is it */
+/* recognize it */
 .what{background:var(--cream)}
-.what .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,5vw,64px);align-items:center}
+.what .wrap{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:clamp(24px,5vw,60px);align-items:start}
 .what .intro{font-size:1.15rem;margin-top:14px}
-.cards{display:grid;gap:12px}
-.card{background:var(--paper);border-radius:16px;padding:16px 18px;display:grid;grid-template-columns:42px minmax(0,1fr);gap:12px;align-items:center;font-size:1rem}
-.card .i{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:#fff;font:800 1.1rem/1 var(--f-head)}
-@media (max-width:760px){ .what .wrap{grid-template-columns:1fr} }
+.idfig{margin:0;background:#fff;border-radius:18px;padding:12px;box-shadow:0 10px 0 rgba(61,37,17,.08);position:relative}
+.idfig .ph img{border-radius:10px}
+.mk{position:absolute;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:var(--brown);color:var(--yellow);font:800 .95rem/28px var(--f-head);text-align:center;box-shadow:0 0 0 2.5px #fff}
+.idfig figcaption{font-size:.8rem;color:var(--muted);font-weight:700;margin-top:10px;text-align:center}
+.traits{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:12px;counter-reset:t}
+.traits li{display:grid;grid-template-columns:32px minmax(0,1fr);gap:12px;align-items:start;font-size:1.06rem}
+.traits li::before{counter-increment:t;content:counter(t);width:30px;height:30px;border-radius:50%;background:var(--brown);color:var(--yellow);display:grid;place-items:center;font:800 1rem/1 var(--f-head)}
+.traits b{color:var(--brown)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:22px}
+.card{background:var(--paper);border-radius:16px;padding:16px;font-size:.98rem}
+.card .i{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;color:#fff;font:800 1.1rem/1 var(--f-head);margin-bottom:10px}
+.alike{margin-top:14px;background:var(--paper);border-left:6px solid var(--teal-ink);border-radius:12px;padding:14px 16px;font-size:1rem}
+@media (max-width:900px){ .cards{grid-template-columns:1fr} }
+@media (max-width:760px){ .what .wrap{grid-template-columns:1fr} .idfig{max-width:330px;margin:0 auto} }
 
 /* map */
-.lead2{font-size:1.1rem;color:var(--muted);margin-top:12px;max-width:60ch}
-.mapbox{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:20px;margin-top:30px;align-items:start}
-.mapcard{background:var(--cream);border-radius:24px;padding:clamp(10px,2vw,20px);position:relative;min-width:0}
-.tm{display:block;width:100%;height:auto}
-.tile{cursor:pointer;outline:none}
-.tile polygon{stroke:#fff;stroke-width:3;transition:filter .15s}
-.tile:hover polygon,.tile:focus-visible polygon{filter:brightness(.94)}
-.tile.sel polygon{stroke:var(--brown);stroke-width:4}
-.tile:focus-visible polygon{stroke:var(--magenta);stroke-width:4}
-.tile.b0 polygon{fill:#FFF6D2} .tile.b1 polygon{fill:#FBE58C} .tile.b2 polygon{fill:#F2AE45} .tile.b3 polygon{fill:#DE6337} .tile.b4 polygon{fill:#8E1B5A}
-.tname{font:700 10px var(--f-body);fill:var(--brown)}
-.tval{font:800 15px var(--f-head);fill:var(--brown)}
-.tile.b3 .tname,.tile.b3 .tval,.tile.b4 .tname,.tile.b4 .tval{fill:#fff}
-.ribbon rect{fill:var(--brown)} .ribbon text{font:800 11px var(--f-body);letter-spacing:.12em;fill:var(--yellow)}
-@media (max-width:640px){ .tname{display:none} .tval{font-size:22px} }
-.legend{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:.84rem;font-weight:700;color:var(--muted);margin:10px 6px 0}
-.legend i{width:18px;height:14px;border-radius:4px;display:inline-block;margin-right:5px;vertical-align:-2px}
+.lead2{font-size:1.1rem;color:var(--muted);margin-top:12px;max-width:64ch}
+.lead2 b{color:var(--brown)}
+.mapbox{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:20px;margin-top:28px;align-items:start}
+.mapcard{background:#fff;border:2px solid var(--brown);border-radius:22px;overflow:hidden;min-width:0}
+.mtools{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1.5px solid var(--rule);background:var(--cream)}
+.seg{display:inline-flex;border:2px solid var(--brown);border-radius:999px;padding:2px;background:#fff}
+.seg button{font:800 .82rem/1 var(--f-body);border:0;background:none;color:var(--brown);padding:.55em .95em;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--brown);color:var(--yellow)}
+.yr{display:flex;align-items:center;gap:8px;font-weight:800;font-size:.86rem;color:var(--brown)}
+.yr select{font:700 .9rem var(--f-body);border:2px solid var(--brown);border-radius:999px;padding:.4em .8em;background:#fff;color:var(--brown)}
+.mapwrap{position:relative;background:#F1EBDF}
+.msvg{display:block;width:100%;height:auto;overflow:hidden;touch-action:pan-x pan-y;-webkit-user-select:none;user-select:none}
+.mapwrap[data-view="city"] .v-prov,.mapwrap[data-view="prov"] .v-city{display:none}
+.msvg.zoomed{touch-action:none;cursor:grab}
+.msvg.dragging{cursor:grabbing}
+.zoom{position:absolute;right:10px;bottom:10px;display:grid;gap:6px}
+.zoom button{width:38px;height:38px;border-radius:10px;border:2px solid var(--brown);background:#fff;color:var(--brown);font:800 1.3rem/1 var(--f-head);cursor:pointer;display:grid;place-items:center;padding:0;box-shadow:0 2px 0 rgba(61,37,17,.15)}
+.zoom button:disabled{opacity:.35;cursor:default}
+.maphint{position:absolute;left:10px;top:10px;margin:0;font-size:.76rem;font-weight:800;color:var(--brown);background:rgba(255,255,255,.9);border-radius:999px;padding:.35em .75em;pointer-events:none}
+.mscale{position:absolute;left:10px;bottom:10px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.9);border-radius:8px;padding:5px 9px;font:800 .78rem/1 var(--f-body);color:var(--brown);pointer-events:none}
+.mscale .bar{display:block;height:7px;border:2px solid var(--brown);border-top:0}
+.mscale .na{font-size:.78rem;padding-right:6px;border-right:1.5px solid var(--rule)}
+/* map layers (strokes keep their width when zooming) */
+.m-urb{fill:#FBF7F1;fill-opacity:.85;stroke:#D6C6B7;stroke-width:.7;vector-effect:non-scaling-stroke}
+.m-terr .snow{stroke:#D3C6B4;stroke-width:.6;vector-effect:non-scaling-stroke}
+.m-lake{fill:#BCD9EA;stroke:#8EBCD6;stroke-width:.8;vector-effect:non-scaling-stroke}
+.m-riv path{fill:none;stroke:#7DB1D3;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.m-riv path.big{stroke:#5B9BC4;stroke-width:2.8}
+.v-prov .m-riv path{stroke-width:1}
+.v-prov .m-riv path.big{stroke-width:1.9}
+.m-road path{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.m-road .t{stroke:#A08A74;stroke-width:2.2}
+.m-road .p{stroke:#B39F89;stroke-width:1.5}
+.m-road .s{stroke:#C9BAA7;stroke-width:1}
+.v-prov .m-road .t{stroke:#9B846D;stroke-width:1.3}
+.m-veil{fill:#fff;fill-opacity:.58;pointer-events:none}
+.dist{fill:transparent;stroke:#5B4334;stroke-opacity:.5;stroke-width:1;vector-effect:non-scaling-stroke;cursor:pointer}
+.dist:hover{fill:rgba(233,51,35,.07);stroke-opacity:.9}
+.dist.sel{fill:rgba(233,51,35,.13);stroke:var(--red);stroke-opacity:1;stroke-width:2.5}
+.m-prov{fill:none;stroke:var(--brown);stroke-width:2;vector-effect:non-scaling-stroke;pointer-events:none}
+.m-lab text{font-family:var(--f-body);font-weight:800;fill:#3D2511;stroke:#fff;stroke-width:3.4px;stroke-linejoin:round;paint-order:stroke;pointer-events:none}
+.m-lab .lb.sel text{fill:var(--red)}
+.lbl-off .m-lab{display:none}
+.lbl-min .m-lab .minor{display:none}
+.m-lm text{font-family:var(--f-body);font-size:13px;font-weight:800;fill:#4A3526;stroke:#fff;stroke-width:3px;stroke-linejoin:round;paint-order:stroke}
+.pl text{font-style:italic}
+.pk path{fill:#6B5546;stroke:#fff;stroke-width:1.2}
+.pl path{fill:var(--brown);stroke:#fff;stroke-width:1}
+.rv text{font-style:italic;fill:#3A7AA6;letter-spacing:.04em}
+.bub{cursor:pointer;outline:none}
+.bub .br{fill:var(--red);fill-opacity:.86;stroke:#fff;stroke-width:1.5;vector-effect:non-scaling-stroke}
+.bub .bk circle{fill:var(--magenta);stroke:#fff;stroke-width:1.3;vector-effect:non-scaling-stroke}
+.bub .bk text{font-family:var(--f-head);font-weight:800;fill:#fff;text-anchor:middle;pointer-events:none}
+.bub .bn{font-family:var(--f-head);font-weight:800;fill:#fff;text-anchor:middle;pointer-events:none}
+.bub:hover .br{fill-opacity:1}
+.bub.sel .br{stroke:var(--brown);stroke-width:3.2}
+.bub:focus-visible .br{stroke:var(--magenta);stroke-width:3.2}
+.m-goto{cursor:pointer;outline:none}
+.m-goto rect{fill:rgba(255,255,255,.01);stroke:var(--brown);stroke-width:1.6;stroke-dasharray:6 4;vector-effect:non-scaling-stroke}
+.m-goto text{font-family:var(--f-body);font-size:15px;font-weight:800;fill:var(--brown);stroke:#fff;stroke-width:3.5px;paint-order:stroke}
+.m-goto:hover rect,.m-goto:focus-visible rect{stroke:var(--red);stroke-width:2.6}
+.mlegend{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;font-size:.8rem;font-weight:700;color:var(--muted);padding:10px 14px;border-top:1.5px solid var(--rule)}
+.mlegend>span{display:inline-flex;align-items:center;gap:6px}
+.mlegend .sw{width:18px;height:12px;border-radius:3px;display:inline-block}
+.sw.urb{background:#FBF7F1;box-shadow:inset 0 0 0 1px #D6C6B7}
+.sw.riv{height:4px!important;background:#5B9BC4;border-radius:2px}
+.sw.alt{width:44px!important;background:linear-gradient(90deg,#EEE7DA,#D8C9B0,#C6B394,#FAF8F4);box-shadow:inset 0 0 0 1px #D3C6B4}
 .panel{background:var(--paper);border:2px solid var(--brown);border-radius:22px;padding:22px;min-width:0}
 .panel .lab{font:800 .74rem/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .panel h3{font-size:1.7rem;margin-top:6px;color:var(--brown)}
-.panel dl{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0 0}
+.panel .per{font-size:.86rem;font-weight:700;color:var(--muted);margin-top:4px}
+.panel dl{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0 0}
 .panel dl div{background:var(--cream);border-radius:14px;padding:12px 14px}
 .panel dt{font-size:.8rem;font-weight:700;color:var(--muted)}
 .panel dd{margin:4px 0 0;font:800 1.9rem/1 var(--f-head);color:var(--brown)}
-.panel dd.soft{font:700 1rem/1.2 var(--f-body);color:var(--muted);padding-top:.4em}
-.panel .pnote{margin-top:12px;font-size:.86rem;font-weight:700;color:var(--red);min-height:1.2em}
-.photos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px}
-.photos>span{aspect-ratio:1;border-radius:12px;border:2px dashed var(--rule);display:grid;place-items:center;text-align:center;font-size:.72rem;font-weight:700;color:var(--muted);padding:6px}
-.photos-cap{font-size:.8rem;color:var(--muted);margin-top:8px}
+.panel dd.k{color:var(--magenta)}
+.yb{display:grid;grid-template-columns:repeat(var(--n,7),minmax(0,1fr));gap:5px;align-items:end;height:118px;margin-top:10px}
+.yb div{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;min-width:0}
+.yb i{display:block;width:100%;background:#F2B9AD;border-radius:5px 5px 2px 2px;min-height:2px}
+.yb .on i{background:var(--red)}
+.yb b{font:800 .74rem/1 var(--f-head);color:var(--brown);margin-bottom:3px}
+.yb span{font-size:.68rem;font-weight:700;color:var(--muted);margin-top:4px}
+.panel .pnote{margin-top:12px;font-size:.86rem;color:var(--muted)}
+.pclear{margin-top:12px;font:800 .84rem/1 var(--f-body);color:var(--brown);background:none;border:2px solid var(--brown);border-radius:999px;padding:.55em 1em;cursor:pointer}
 .privacy{display:flex;gap:12px;align-items:flex-start;margin-top:22px;background:#E8F4F2;border-radius:16px;padding:16px 18px;font-size:.98rem}
 .privacy b{color:var(--teal-ink)}
-.samplenote{margin-top:12px;font-size:.88rem;color:var(--muted)}
-.samplenote b{color:var(--red)}
+.datanote{margin-top:12px;font-size:.9rem;color:var(--muted);max-width:80ch}
+.datanote b{color:var(--brown)}
+.mattr{margin-top:10px;font-size:.78rem;color:var(--muted)}
+.mattr a{font-weight:700}
 details.tbl{margin-top:16px;border:1.5px solid var(--rule);border-radius:16px;padding:0 16px}
 details.tbl summary{cursor:pointer;font-weight:800;padding:14px 0;color:var(--brown)}
 details.tbl table{width:100%;border-collapse:collapse;font-size:.92rem;margin-bottom:14px}
 details.tbl caption{text-align:left;font-size:.8rem;font-weight:700;color:var(--muted);padding-bottom:8px}
 details.tbl th,details.tbl td{text-align:left;padding:7px 4px;border-top:1px solid var(--rule)}
 details.tbl td.num,details.tbl th.num{text-align:right;font-variant-numeric:tabular-nums;font:inherit}
-@media (max-width:860px){ .mapbox{grid-template-columns:1fr} }
+details.tbl tbody tr{cursor:pointer}
+details.tbl tbody tr:hover{background:var(--cream)}
+details.tbl tbody tr.sel{background:#FDECE8}
+@media (max-width:900px){ .mapbox{grid-template-columns:1fr} }
 
 /* alerts */
 .alerts{background:var(--yellow)}
 .alert-card{margin-top:28px;background:var(--paper);border-radius:24px;padding:clamp(20px,3vw,32px);display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:center;box-shadow:0 10px 0 rgba(61,37,17,.12)}
-.alert-card .tag{background:var(--red);color:#fff;font:800 1.4rem/1 var(--f-head);padding:.3em .5em .2em;border-radius:6px;transform:rotate(-3deg)}
+.alert-card .tag2{background:var(--red);color:#fff;font:800 1.4rem/1 var(--f-head);padding:.3em .5em .2em;border-radius:6px;transform:rotate(-3deg)}
 .alert-card .when{font-size:.84rem;font-weight:700;color:var(--muted)}
 .alert-card h3{margin-top:6px;color:var(--brown)}
 .hoods{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .hoods span{color:#fff;font:700 1rem/1 var(--f-head);padding:.35em .6em .25em;border-radius:4px}
 .hoods span:nth-child(3n+1){background:var(--magenta)} .hoods span:nth-child(3n+2){background:var(--orange)} .hoods span:nth-child(3n){background:var(--teal-ink)}
 .alerts .more{margin-top:20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-@media (max-width:600px){ .alert-card{grid-template-columns:1fr} .alert-card .tag{justify-self:start} }
+@media (max-width:600px){ .alert-card{grid-template-columns:1fr} .alert-card .tag2{justify-self:start} }
 
-/* videos */
-.vids{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:auto auto;gap:14px;margin-top:28px}
-.vid{background:var(--brown);border-radius:18px;aspect-ratio:16/9;display:grid;place-items:center;color:var(--yellow);position:relative;overflow:hidden;min-width:0}
-.vid.main{grid-row:span 2;aspect-ratio:auto;min-height:280px}
-.vid .play{width:54px;height:54px;border-radius:50%;background:var(--yellow);display:grid;place-items:center}
-.vid .vl{position:absolute;left:14px;bottom:12px;right:14px;font-weight:800;font-size:.9rem;color:#fff}
-.vid .vl small{display:block;font-weight:600;color:var(--yellow);opacity:.85}
-@media (max-width:760px){ .vids{grid-template-columns:1fr 1fr} .vid.main{grid-column:span 2;grid-row:auto;min-height:200px} }
+/* video */
+.vbox{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:18px;margin-top:26px;align-items:start}
+.player{background:#000;border-radius:20px;overflow:hidden;aspect-ratio:16/9}
+.player video{display:block;width:100%;height:100%}
+.chapters{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.chapters button{display:grid;grid-template-columns:112px minmax(0,1fr);gap:12px;align-items:center;width:100%;text-align:left;background:var(--cream);border:2px solid transparent;border-radius:14px;padding:6px;cursor:pointer;font:inherit;color:var(--ink)}
+.chapters button:hover{border-color:var(--rule)}
+.chapters button.on{border-color:var(--brown);background:#fff}
+.chapters img{width:112px;height:63px;object-fit:cover;border-radius:9px;display:block;background:#eee}
+.chapters b{display:block;font:800 1.02rem/1.15 var(--f-head);color:var(--brown)}
+.chapters small{font-size:.8rem;color:var(--muted);font-weight:700}
+.vcredit{font-size:.82rem;color:var(--muted);margin-top:12px}
+@media (max-width:860px){ .vbox{grid-template-columns:1fr} }
 
 /* faq */
 .faq{max-width:780px}
@@ -188,6 +271,8 @@ details.tbl td.num,details.tbl th.num{text-align:right;font-variant-numeric:tabu
 .about p+p{margin-top:12px}
 .about .paper{background:var(--paper);border-radius:18px;padding:20px 22px;font-size:.98rem}
 .about .paper a{font-weight:800;color:var(--magenta)}
+.sources{margin:10px 0 0;padding-left:1.1em;font-size:.92rem}
+.sources li+li{margin-top:6px}
 @media (max-width:760px){ .about .wrap{grid-template-columns:1fr} }
 footer{background:var(--brown);color:#F5E9D8;padding-block:36px 40px;font-size:.92rem}
 footer .wrap{display:flex;flex-wrap:wrap;gap:18px 40px;justify-content:space-between;align-items:center}
@@ -230,9 +315,10 @@ footer .fine{flex-basis:100%;font-size:.8rem;opacity:.8}
     <nav aria-label="⟦Secciones||Sections⟧">
       <ul>
         <li><a href="#como">⟦Cómo reportar||How to report⟧</a></li>
+        <li><a href="#chirimacha">⟦Reconócela||Recognize it⟧</a></li>
         <li><a href="#mapa">⟦Mapa||Map⟧</a></li>
         <li><a href="#alertas">⟦Alertas||Alerts⟧</a></li>
-        <li><a href="#videos">⟦Videos||Videos⟧</a></li>
+        <li><a href="#videos">⟦Video||Video⟧</a></li>
         <li><a href="#preguntas">⟦Preguntas||FAQ⟧</a></li>
       </ul>
     </nav>
@@ -263,30 +349,13 @@ footer .fine{flex-basis:100%;font-size:.8rem;opacity:.8}
       </div>
     </div>
     <div class="art">
-      <svg class="bugart" viewBox="0 0 240 320" role="img" aria-labelledby="t-art">
-        <title id="t-art">⟦Ilustración de una chirimacha vista desde arriba||Illustration of a chirimacha seen from above⟧</title>
-        <defs><clipPath id="abd"><path d="M120 118c42 0 60 42 60 90 0 48-28 86-60 92-32-6-60-44-60-92 0-48 18-90 60-90z"/></clipPath></defs>
-        <g fill="none" stroke="#3D2511" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M113 60C106 40 97 26 82 14"/><path d="M127 60c7-20 16-34 31-46"/>
-          <path d="M103 112 72 98 54 70"/><path d="M137 112l31-14 18-28"/>
-          <path d="M98 152H60l-26-20"/><path d="M142 152h38l26-20"/>
-          <path d="M100 190 64 218 46 268"/><path d="M140 190l36 28 18 50"/>
-        </g>
-        <path d="M120 118c42 0 60 42 60 90 0 48-28 86-60 92-32-6-60-44-60-92 0-48 18-90 60-90z" fill="#3D2511"/>
-        <g clip-path="url(#abd)" fill="#F2A03A">
-          <rect x="56" y="150" width="30" height="16"/><rect x="154" y="150" width="30" height="16"/>
-          <rect x="56" y="184" width="30" height="16"/><rect x="154" y="184" width="30" height="16"/>
-          <rect x="56" y="218" width="30" height="16"/><rect x="154" y="218" width="30" height="16"/>
-          <rect x="56" y="252" width="30" height="16"/><rect x="154" y="252" width="30" height="16"/>
-        </g>
-        <path d="M120 132c-22 8-38 40-38 80 0 34 14 60 38 74z" fill="#5B3A22"/>
-        <path d="M120 132c22 8 38 40 38 80 0 34-14 60-38 74z" fill="#4A2E1A"/>
-        <path d="M96 90h48l14 38H82z" fill="#3D2511"/>
-        <path d="M108 128h24l-12 24z" fill="#6E4A2E"/>
-        <path d="M111 92l3-38c2-7 10-7 12 0l3 38z" fill="#3D2511"/>
-        <circle cx="109" cy="80" r="5" fill="#3D2511"/><circle cx="131" cy="80" r="5" fill="#3D2511"/>
-      </svg>
-      <p class="artcap">⟦Ilustración, no es una foto||Illustration, not a photo⟧</p>
+      <figure class="photo">
+        <div class="ph">
+          <img src="assets/chirimacha.jpg" width="469" height="788" alt="⟦Chirimacha adulta (Triatoma infestans) vista desde arriba, sobre fondo amarillo||Adult chirimacha (Triatoma infestans) seen from above, on a yellow background⟧">
+          <span class="tag" aria-hidden="true">⟦Chirimacha adulta||Adult chirimacha⟧</span>
+        </div>
+        <figcaption>⟦<i>Triatoma infestans</i> · Foto: Alerta Chirimacha||<i>Triatoma infestans</i> · Photo: Alerta Chirimacha⟧</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -298,76 +367,118 @@ footer .fine{flex-basis:100%;font-size:.8rem;opacity:.8}
     <h2 id="h-como">⟦Tres pasos, desde tu celular||Three steps, from your phone⟧</h2>
     <ol class="steps">
       <li><span class="n">1</span><div class="ico" aria-hidden="true"><svg width="64" height="54" viewBox="0 0 64 54"><rect x="20" y="3" width="24" height="7" rx="2" fill="#E93323"/><path d="M22 10h20v4c4 2 6 5 6 9v20a7 7 0 0 1-7 7H23a7 7 0 0 1-7-7V23c0-4 2-7 6-9z" fill="none" stroke="#3D2511" stroke-width="3" stroke-linejoin="round"/><use href="#bug" x="22" y="22" width="20" height="20" color="#3D2511"/></svg></div>
-        <p>⟦<b>No la toques con las manos ni la aplastes.</b> Si puedes, atrápala en un frasco o una bolsa.||<b>Don't touch it with bare hands or squash it.</b> If you can, trap it in a jar or a bag.⟧</p></li>
-      <li><span class="n">2</span><div class="ico" aria-hidden="true"><svg width="64" height="54" viewBox="0 0 64 54"><rect x="6" y="12" width="52" height="36" rx="8" fill="none" stroke="#3D2511" stroke-width="3"/><circle cx="32" cy="30" r="10" fill="none" stroke="#3D2511" stroke-width="3"/><path d="M22 12l4-7h12l4 7" fill="none" stroke="#3D2511" stroke-width="3" stroke-linejoin="round"/></svg></div>
-        <p>⟦<b>Tómale una foto</b> de cerca y con buena luz.||<b>Take a photo</b> up close, in good light.⟧</p></li>
+        <p>⟦<b>No la toques con las manos.</b> <mark class="tbc" title="Por confirmar con el equipo">Atrápala con una bolsa plástica o un guante y guárdala en un frasco o una bolsa bien cerrada.</mark>||<b>Don't touch it with bare hands.</b> <mark class="tbc" title="To confirm with the team">Catch it with a plastic bag or a glove and keep it in a tightly closed jar or bag.</mark>⟧</p></li>
+      <li><span class="n">2</span><div class="ico" aria-hidden="true"><svg width="56" height="54" viewBox="0 0 56 54"><rect x="9" y="5" width="34" height="44" rx="5" fill="none" stroke="#3D2511" stroke-width="3"/><path d="M16 17h20M16 25h20M16 33h12" stroke="#3D2511" stroke-width="3" stroke-linecap="round"/><path d="M38 40l10-14 4 3-10 14-5 1z" fill="#DE6337" stroke="#3D2511" stroke-width="2" stroke-linejoin="round"/></svg></div>
+        <p>⟦<b>Anota cuándo y dónde.</b> <mark class="tbc" title="Por confirmar con el equipo">La fecha y la hora, si estaba dentro o fuera de la casa, y si alguien, persona o animal, pudo ser picado.</mark>||<b>Note when and where.</b> <mark class="tbc" title="To confirm with the team">The date and time, whether it was inside or outside the house, and whether anyone, person or animal, may have been bitten.</mark>⟧</p></li>
       <li><span class="n">3</span><div class="ico" aria-hidden="true"><svg width="54" height="54" viewBox="0 0 24 24" color="#3D2511"><use href="#chat"/></svg></div>
-        <p>⟦<b>Envíala por WhatsApp</b> al <span class="nw">989 279 579</span> con el nombre de tu distrito.||<b>Send it on WhatsApp</b> to <span class="nw">989 279 579</span> with the name of your district.⟧</p></li>
+        <p>⟦<b>Tómale una foto y envíala por WhatsApp</b> al <span class="nw">989 279 579</span>, con tu distrito y lo que anotaste.||<b>Take a photo and send it on WhatsApp</b> to <span class="nw">989 279 579</span>, with your district and your notes.⟧</p></li>
     </ol>
+    <div class="squish"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 21h20z" fill="none" stroke="#E93323" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v5M12 18v.5" stroke="#E93323" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <p>⟦<b>¿La aplastaste?</b> <mark class="tbc" title="Por confirmar con el equipo">No la toques. Recógela con una bolsa y limpia el lugar con lejía, siguiendo las indicaciones de la etiqueta.</mark> Igual puedes tomarle una foto y enviarla.||<b>Did you squash it?</b> <mark class="tbc" title="To confirm with the team">Don't touch it. Pick it up with a bag and clean the spot with bleach, following the label.</mark> You can still take a photo and send it.⟧</p></div>
     <p class="next">⟦<b>¿Y después?</b> Te respondemos. <mark class="tbc" title="Por confirmar con el equipo">Si es una chirimacha, coordinamos la inspección de tu vivienda y avisamos a tus vecinos.</mark>||<b>What happens next?</b> We reply. <mark class="tbc" title="To confirm with the team">If it is a chirimacha, we arrange an inspection of your home and alert your neighbors.</mark>⟧</p>
     <div class="fact">
-      <span class="big">11 / 206</span>
-      <p>⟦<b>La mayoría de insectos que nos envían no son chirimachas. ¡Igual envíanos la foto!</b> De los primeros 206 reportes, 11 fueron chirimachas.<span class="src">Tamayo y colegas, <i>PLOS Neglected Tropical Diseases</i>, 2023</span>||<b>Most insects people send us are not chirimachas. Send the photo anyway!</b> Of the first 206 reports, 11 were chirimachas.<span class="src">Tamayo and colleagues, <i>PLOS Neglected Tropical Diseases</i>, 2023</span>⟧</p>
+      <span class="big">@@K_ALL@@ / @@N_IDENT@@</span>
+      <p>⟦<b>La mayoría de insectos que nos envían no son chirimachas. ¡Igual envíanos la foto!</b> De @@N_IDENT@@ insectos que el equipo identificó desde @@FROM_ES@@, @@K_ALL@@ fueron chirimachas.<span class="src">Registro de reportes de Alerta Chirimacha, @@FROM_ES@@ a @@TO_ES@@</span>||<b>Most insects people send us are not chirimachas. Send the photo anyway!</b> Of @@N_IDENT@@ insects the team identified since @@FROM_EN@@, @@K_ALL@@ were chirimachas.<span class="src">Alerta Chirimacha report log, @@FROM_EN@@ to @@TO_EN@@</span>⟧</p>
     </div>
+    <p class="srcline">⟦Pasos 1 y 2 y el aviso sobre insectos aplastados adaptados de la guía <a href="https://kissingbug.tamu.edu/found-a-bug/" target="_blank" rel="noopener">«Found a bug?»</a> del programa de ciencia ciudadana Kissing Bug de Texas A&amp;M.||Steps 1 and 2 and the note on squashed insects are adapted from the <a href="https://kissingbug.tamu.edu/found-a-bug/" target="_blank" rel="noopener">“Found a bug?”</a> guide of Texas A&amp;M's Kissing Bug community science program.⟧</p>
   </div>
 </section>
 
-<!-- WHAT IS IT -->
+<!-- RECOGNIZE IT -->
 <section class="what" id="chirimacha" aria-labelledby="h-what">
   <div class="wrap">
+    <figure class="idfig">
+      <div class="ph">
+        <img src="assets/chirimacha.jpg" width="469" height="788" loading="lazy" alt="⟦La misma chirimacha con números sobre la cabeza, una antena, el cuerpo y el borde con franjas||The same chirimacha with numbers on the head, an antenna, the body and the striped edge⟧">
+        <span class="tag" aria-hidden="true">⟦Adulta||Adult⟧</span>
+        <span class="mk" style="left:40.9%;top:19%" aria-hidden="true">1</span>
+        <span class="mk" style="left:31.8%;top:6.4%" aria-hidden="true">2</span>
+        <span class="mk" style="left:39.4%;top:59.6%" aria-hidden="true">3</span>
+        <span class="mk" style="left:14.9%;top:71.1%" aria-hidden="true">4</span>
+      </div>
+      <figcaption>⟦Adulta, vista desde arriba. Foto: Alerta Chirimacha||Adult, seen from above. Photo: Alerta Chirimacha⟧</figcaption>
+    </figure>
     <div>
-      <span class="kicker">⟦Conócela||Know it⟧</span>
-      <h2 id="h-what">⟦¿Qué es la chirimacha?||What is the chirimacha?⟧</h2>
+      <span class="kicker">⟦Reconócela||Recognize it⟧</span>
+      <h2 id="h-what">⟦¿Cómo es una chirimacha?||What does a chirimacha look like?⟧</h2>
       <p class="intro">⟦Es el insecto <i>Triatoma infestans</i>. Puede transmitir el parásito que causa la enfermedad de Chagas.||It is the insect <i>Triatoma infestans</i>. It can transmit the parasite that causes Chagas disease.⟧</p>
-    </div>
-    <div class="cards">
-      <div class="card"><span class="i" style="background:var(--magenta)" aria-hidden="true">☾</span><p>⟦Sale de noche y se alimenta de la sangre de personas y animales.||It comes out at night and feeds on the blood of people and animals.⟧</p></div>
-      <div class="card"><span class="i" style="background:var(--orange)" aria-hidden="true">⌂</span><p>⟦Se esconde en grietas de paredes y techos, y en corrales de cuyes y gallinas.||It hides in cracks in walls and roofs, and in guinea pig and chicken pens.⟧</p></div>
-      <div class="card"><span class="i" style="background:var(--teal-ink)" aria-hidden="true">✦</span><p>⟦Las crías no tienen alas y son más pequeñas, pero también son chirimachas. Repórtalas igual.||The young have no wings and are smaller, but they are chirimachas too. Report them the same way.⟧</p></div>
+      <ol class="traits">
+        <li><p>⟦<b>Cabeza alargada</b>, en forma de cono.||<b>Long head</b>, shaped like a cone.⟧</p></li>
+        <li><p>⟦<b>Antenas y patas largas y delgadas.</b>||<b>Long, thin antennae and legs.</b>⟧</p></li>
+        <li><p>⟦<b>Cuerpo aplanado</b>, marrón oscuro o negro.||<b>Flat body</b>, dark brown or black.⟧</p></li>
+        <li><p>⟦<b>Borde del cuerpo con franjas</b> amarillas o anaranjadas y negras.||<b>Striped edge</b> around the body, yellow or orange and black.⟧</p></li>
+      </ol>
+      <div class="cards">
+        <div class="card"><span class="i" style="background:var(--magenta)" aria-hidden="true">☾</span><p>⟦Sale de noche y se alimenta de la sangre de personas y animales. <mark class="tbc" title="Por confirmar con el equipo">Su picadura casi no duele.</mark>||It comes out at night and feeds on the blood of people and animals. <mark class="tbc" title="To confirm with the team">Its bite is usually painless.</mark>⟧</p></div>
+        <div class="card"><span class="i" style="background:var(--orange)" aria-hidden="true">⌂</span><p>⟦Se esconde en lugares oscuros: grietas de paredes y techos, detrás de cuadros, y en corrales de cuyes y gallinas.||It hides in dark places: cracks in walls and roofs, behind pictures, and in guinea pig and chicken pens.⟧</p></div>
+        <div class="card"><span class="i" style="background:var(--teal-ink)" aria-hidden="true">✦</span><p>⟦Las crías no tienen alas y son más pequeñas; pasan por cinco etapas antes de ser adultas. También son chirimachas: repórtalas igual.||The young have no wings and are smaller; they go through five stages before becoming adults. They are chirimachas too: report them the same way.⟧</p></div>
+      </div>
+      <p class="alike">⟦<b>Hay insectos parecidos</b>, como las chinches de cama, otras chinches y algunos escarabajos. Si no estás seguro, envíanos la foto: el equipo te dirá qué es.||<b>Some insects look similar</b>, like bed bugs, other true bugs and some beetles. If you're not sure, send us the photo: the team will tell you what it is.⟧</p>
+      <p class="srcline">⟦Fuentes: el video de Alerta Chirimacha (más abajo) y la guía <a href="https://kissingbug.tamu.edu/found-a-bug/" target="_blank" rel="noopener">«Found a bug?»</a> de Texas A&amp;M. Insectos parecidos: registro de reportes del equipo.||Sources: the Alerta Chirimacha video (below) and Texas A&amp;M's <a href="https://kissingbug.tamu.edu/found-a-bug/" target="_blank" rel="noopener">“Found a bug?”</a> guide. Look-alikes: the team's report log.⟧</p>
     </div>
   </div>
 </section>
 
 <!-- MAP -->
-<section id="mapa" class="@@SAMPLE_CLASS@@" aria-labelledby="h-mapa">
+<section id="mapa" aria-labelledby="h-mapa">
   <div class="wrap">
     <span class="kicker">⟦Nuestros reportes||Our reports⟧</span>
     <h2 id="h-mapa">⟦Reportes por distrito||Reports by district⟧</h2>
-    <p class="lead2">⟦Cada hexágono es un distrito de la provincia de Arequipa. El número es la cantidad de reportes recibidos. Toca un distrito para ver más.||Each hexagon is a district of Arequipa province. The number is how many reports we received. Tap a district to see more.⟧</p>
+    <p class="lead2">⟦Desde @@FROM_ES@@ hasta @@TO_ES@@ recibimos <b>@@N_ALL@@ reportes</b>. <b>@@N_PROV@@</b> vienen de distritos de la provincia de Arequipa y están en el mapa: cuanto más grande el círculo, más reportes. Toca un círculo o un distrito para ver más.||From @@FROM_EN@@ to @@TO_EN@@ we received <b>@@N_ALL@@ reports</b>. <b>@@N_PROV@@</b> came from districts of Arequipa province and are on the map: the bigger the circle, the more reports. Tap a circle or a district to see more.⟧</p>
     <div class="mapbox">
       <div class="mapcard">
-        @@TILEMAP@@
-        <div class="legend" aria-hidden="true">
-          <span><i style="background:#FFF6D2;box-shadow:inset 0 0 0 1px #E8D9A6"></i>0</span>
-          <span><i style="background:#FBE58C"></i>1–5</span>
-          <span><i style="background:#F2AE45"></i>6–15</span>
-          <span><i style="background:#DE6337"></i>16–30</span>
-          <span><i style="background:#8E1B5A"></i>⟦31 o más||31 or more⟧</span>
+        <div class="mtools">
+          <div class="seg" role="group" aria-label="⟦Vista del mapa||Map view⟧">
+            <button type="button" data-viewbtn="city" aria-pressed="true">⟦Ciudad||City⟧</button>
+            <button type="button" data-viewbtn="prov" aria-pressed="false">⟦Provincia||Province⟧</button>
+          </div>
+          <label class="yr">⟦Año||Year⟧ <select id="yearSel"><option value="all">⟦Todos (@@Y0@@–@@Y1@@)||All (@@Y0@@–@@Y1@@)⟧</option>@@YEAR_OPTIONS@@</select></label>
+        </div>
+        <div class="mapwrap" data-view="city">
+          @@MAP_CITY@@
+          @@MAP_PROV@@
+          <div class="zoom">
+            <button type="button" id="zIn" aria-label="⟦Acercar||Zoom in⟧">+</button>
+            <button type="button" id="zOut" aria-label="⟦Alejar||Zoom out⟧" disabled>−</button>
+            <button type="button" id="zReset" aria-label="⟦Ver todo el mapa||Show the whole map⟧" disabled><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+          <p class="maphint" hidden>⟦Acerca el mapa (+) para ver los nombres||Zoom in (+) to see the names⟧</p>
+          <div class="mscale" aria-hidden="true"><span class="na">N ↑</span><span class="bar" style="width:80px"></span><b>5 km</b></div>
+        </div>
+        <div class="mlegend" aria-hidden="true">
+          <span><svg width="42" height="26" viewBox="0 0 42 26"><circle cx="13" cy="13" r="12" fill="#E93323" fill-opacity=".86" stroke="#fff" stroke-width="1.5"/><circle cx="33" cy="18" r="6" fill="#E93323" fill-opacity=".86" stroke="#fff" stroke-width="1.5"/></svg>⟦Reportes||Reports⟧</span>
+          <span><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="8" fill="#8E1B5A" stroke="#fff" stroke-width="1.3"/><text x="9" y="13" text-anchor="middle" font-size="11" font-weight="800" fill="#fff" font-family="Baloo 2, sans-serif">3</text></svg>⟦Chirimachas confirmadas (<i>T. infestans</i>)||Confirmed chirimachas (<i>T. infestans</i>)⟧</span>
+          <span><i class="sw urb"></i>⟦Zona urbana||Built-up area⟧</span>
+          <span><i class="sw riv"></i>⟦Río||River⟧</span>
+          <span><i class="sw alt"></i>⟦Altitud (más oscuro = más alto)||Elevation (darker = higher)⟧</span>
         </div>
       </div>
       <aside class="panel" aria-live="polite">
         <p class="lab">⟦Distrito||District⟧</p>
-        <h3 id="pName">⟦Toca un distrito||Tap a district⟧</h3>
+        <h3 id="pName">⟦Provincia de Arequipa||Arequipa province⟧</h3>
+        <p class="per" id="pPer">⟦@@FROM_ES@@ a @@TO_ES@@||@@FROM_EN@@ to @@TO_EN@@⟧</p>
         <dl>
-          <div><dt>⟦Reportes recibidos||Reports received⟧</dt><dd id="pRep">@@TOTAL@@</dd></div>
-          <div><dt>⟦Chirimachas confirmadas||Confirmed chirimachas⟧</dt><dd id="pConf" class="soft">—</dd></div>
+          <div><dt>⟦Reportes recibidos||Reports received⟧</dt><dd id="pRep">@@N_PROV@@</dd></div>
+          <div><dt>⟦Chirimachas confirmadas||Confirmed chirimachas⟧</dt><dd id="pConf" class="k">@@K_PROV@@</dd></div>
         </dl>
+        <p class="lab" style="margin-top:18px">⟦Reportes por año||Reports per year⟧</p>
+        <div class="yb" id="pBars" aria-hidden="true"></div>
         <p class="pnote" id="pNote"></p>
-        <div class="photos" aria-hidden="true"><span>⟦Foto de un insecto reportado||Photo of a reported insect⟧</span><span>⟦Foto||Photo⟧</span><span>⟦Foto||Photo⟧</span></div>
-        <p class="photos-cap">⟦Próximamente: fotos de insectos reportados que no son peligrosos, sin datos de ubicación.||Coming soon: photos of reported insects that are not dangerous, with location data removed.⟧</p>
+        <button type="button" class="pclear" id="pClear" hidden>⟦Ver toda la provincia||Show the whole province⟧</button>
       </aside>
     </div>
     <div class="privacy"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z" fill="none" stroke="#24706A" stroke-width="2"/><path d="M8.5 12l2.5 2.5 4.5-5" fill="none" stroke="#24706A" stroke-width="2" stroke-linecap="round"/></svg>
-      <p>⟦<b>Tu privacidad:</b> solo mostramos totales por distrito. Nunca mostramos casas, direcciones ni nombres.||<b>Your privacy:</b> we only show totals by district. We never show homes, addresses or names.⟧</p></div>
-    <p class="samplenote">⟦<b>Datos de ejemplo.</b> Los números de este borrador no son reales; se reemplazarán con los datos del equipo. Los distritos están ubicados de forma aproximada; no es un mapa a escala.||<b>Sample data.</b> The numbers in this draft are not real; they will be replaced with the team's data. Districts are placed approximately; this is not a map to scale.⟧</p>
+      <p>⟦<b>Tu privacidad:</b> solo mostramos totales por distrito. Nunca mostramos casas, direcciones ni nombres. Cada círculo está en la zona urbana de su distrito, no en una casa.||<b>Your privacy:</b> we only show totals by district. We never show homes, addresses or names. Each circle sits in the built-up area of its district, not on a home.⟧</p></div>
+    <p class="datanote">⟦<b>Sobre los datos.</b> Reportes recibidos por Alerta Chirimacha por WhatsApp, teléfono y establecimientos de salud. Un reporte no siempre es una chirimacha: el equipo revisa cada foto, y «confirmadas» son las que identificó como <i>Triatoma infestans</i>. Los @@N_OUT@@ reportes de otras provincias, de otras regiones o sin distrito no están en el mapa. <mark class="tbc" title="Por confirmar con el equipo">Datos reales del equipo: confirmar antes de publicar.</mark>||<b>About the data.</b> Reports received by Alerta Chirimacha on WhatsApp, by phone and at health facilities. A report is not always a chirimacha: the team checks every photo, and “confirmed” means the team identified it as <i>Triatoma infestans</i>. The @@N_OUT@@ reports from other provinces, other regions or with no district are not on the map. <mark class="tbc" title="To confirm with the team">Real team data: confirm before publishing.</mark>⟧</p>
     <details class="tbl">
       <summary>⟦Ver como tabla||View as a table⟧</summary>
       <table>
-        <caption>⟦Reportes por distrito (datos de ejemplo)||Reports by district (sample data)⟧</caption>
+        <caption id="tCap">⟦Reportes por distrito, @@FROM_ES@@ a @@TO_ES@@||Reports by district, @@FROM_EN@@ to @@TO_EN@@⟧</caption>
         <thead><tr><th scope="col">⟦Distrito||District⟧</th><th scope="col" class="num">⟦Reportes||Reports⟧</th><th scope="col" class="num">⟦Confirmadas||Confirmed⟧</th></tr></thead>
         <tbody>@@TABLE_ROWS@@</tbody>
       </table>
     </details>
+    <p class="mattr">⟦Mapa: límites distritales del <a href="https://ide.inei.gob.pe/" target="_blank" rel="noopener">INEI</a> (vía <a href="https://github.com/PaulESantos/perugeopkg" target="_blank" rel="noopener">perugeopkg</a>, CC BY-SA 4.0) · calles, ríos y zona urbana © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">colaboradores de OpenStreetMap</a> · relieve: <a href="https://registry.opendata.aws/terrain-tiles/" target="_blank" rel="noopener">Terrain Tiles</a> (datos SRTM).||Map: district boundaries from <a href="https://ide.inei.gob.pe/" target="_blank" rel="noopener">INEI</a> (via <a href="https://github.com/PaulESantos/perugeopkg" target="_blank" rel="noopener">perugeopkg</a>, CC BY-SA 4.0) · streets, rivers and built-up area © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a> · terrain: <a href="https://registry.opendata.aws/terrain-tiles/" target="_blank" rel="noopener">Terrain Tiles</a> (SRTM data).⟧</p>
   </div>
 </section>
 
@@ -378,7 +489,7 @@ footer .fine{flex-basis:100%;font-size:.8rem;opacity:.8}
     <h2 id="h-alertas">⟦Alertas en tu zona||Alerts in your area⟧</h2>
     <p class="lead2" style="color:var(--brown)">⟦Cuando confirmamos una chirimacha, avisamos a los vecinos de esa zona por Facebook.||When we confirm a chirimacha, we alert the neighbors in that area on Facebook.⟧</p>
     <article class="alert-card">
-      <span class="tag" aria-hidden="true">⟦¡ALERTA!||ALERT!⟧</span>
+      <span class="tag2" aria-hidden="true">⟦¡ALERTA!||ALERT!⟧</span>
       <div>
         <p class="when">⟦Ejemplo publicado en Facebook · 13 de abril de 2026||Example posted on Facebook · April 13, 2026⟧</p>
         <h3>⟦Distrito de Jacobo Hunter||Jacobo Hunter district⟧</h3>
@@ -392,19 +503,22 @@ footer .fine{flex-basis:100%;font-size:.8rem;opacity:.8}
   </div>
 </section>
 
-<!-- VIDEOS -->
+<!-- VIDEO -->
 <section id="videos" aria-labelledby="h-videos">
   <div class="wrap">
-    <span class="kicker">⟦Videos||Videos⟧</span>
+    <span class="kicker">⟦Video||Video⟧</span>
     <h2 id="h-videos">⟦Aprende a reconocerla||Learn to recognize it⟧</h2>
-    <p class="lead2">⟦Videos en español del equipo de Alerta Chirimacha.||Spanish-language videos from the Alerta Chirimacha team.⟧</p>
-    <div class="vids">
-      <div class="vid main"><span class="play" aria-hidden="true"><svg width="20" height="22" viewBox="0 0 20 22"><path d="M2 2l16 9-16 9z" fill="#3D2511"/></svg></span><p class="vl">⟦Video completo · 4 min||Full video · 4 min⟧<small>⟦Pendiente: lo enviará el equipo||Pending: the team will send it⟧</small></p></div>
-      <div class="vid"><span class="play" aria-hidden="true"><svg width="16" height="18" viewBox="0 0 20 22"><path d="M2 2l16 9-16 9z" fill="#3D2511"/></svg></span><p class="vl">⟦Parte 1||Part 1⟧<small>⟦Pendiente||Pending⟧</small></p></div>
-      <div class="vid"><span class="play" aria-hidden="true"><svg width="16" height="18" viewBox="0 0 20 22"><path d="M2 2l16 9-16 9z" fill="#3D2511"/></svg></span><p class="vl">⟦Parte 2||Part 2⟧<small>⟦Pendiente||Pending⟧</small></p></div>
-      <div class="vid"><span class="play" aria-hidden="true"><svg width="16" height="18" viewBox="0 0 20 22"><path d="M2 2l16 9-16 9z" fill="#3D2511"/></svg></span><p class="vl">⟦Parte 3||Part 3⟧<small>⟦Pendiente||Pending⟧</small></p></div>
-      <div class="vid"><span class="play" aria-hidden="true"><svg width="16" height="18" viewBox="0 0 20 22"><path d="M2 2l16 9-16 9z" fill="#3D2511"/></svg></span><p class="vl">⟦Parte 4||Part 4⟧<small>⟦Pendiente||Pending⟧</small></p></div>
+    <p class="lead2">⟦Video animado del equipo de Alerta Chirimacha, en español (2 min 17 s). Elige una parte para ir directo.||Animated video from the Alerta Chirimacha team, in Spanish (2 min 17 s). Pick a part to jump to it.⟧</p>
+    <div class="vbox">
+      <div class="player"><video id="vid" controls preload="metadata" playsinline poster="media/video-poster.jpg" aria-label="⟦Video: la enfermedad de Chagas y la chirimacha||Video: Chagas disease and the chirimacha⟧"><source src="media/alerta-chirimacha-video.mp4" type="video/mp4"></video></div>
+      <ol class="chapters">
+        <li><button type="button" data-t="0"><img src="media/parte1.jpg" width="384" height="216" alt=""><span><b>⟦1. ¿Qué es el Chagas?||1. What is Chagas disease?⟧</b><small>0:00</small></span></button></li>
+        <li><button type="button" data-t="34"><img src="media/parte2.jpg" width="384" height="216" alt=""><span><b>⟦2. Cómo es la chirimacha||2. What the chirimacha looks like⟧</b><small>0:34</small></span></button></li>
+        <li><button type="button" data-t="64"><img src="media/parte3.jpg" width="384" height="216" alt=""><span><b>⟦3. Dónde se esconde||3. Where it hides⟧</b><small>1:04</small></span></button></li>
+        <li><button type="button" data-t="103"><img src="media/parte4.jpg" width="384" height="216" alt=""><span><b>⟦4. Qué hacer si la encuentras||4. What to do if you find it⟧</b><small>1:43</small></span></button></li>
+      </ol>
     </div>
+    <p class="vcredit">⟦Video: Alerta Chirimacha y Gobierno Regional de Arequipa, Gerencia Regional de Salud (2022). <mark class="tbc" title="Por confirmar con el equipo">Confirmar créditos y versión.</mark>||Video: Alerta Chirimacha and the Arequipa Regional Government, Regional Health Office (2022). <mark class="tbc" title="To confirm with the team">Confirm credits and version.</mark>⟧</p>
   </div>
 </section>
 
@@ -418,6 +532,7 @@ footer .fine{flex-basis:100%;font-size:.8rem;opacity:.8}
       <details><summary>⟦¿Tengo que descargar una aplicación?||Do I need to download an app?⟧</summary><p>⟦No. Solo necesitas WhatsApp.||No. You only need WhatsApp.⟧</p></details>
       <details><summary>⟦¿Van a publicar mi nombre o mi dirección?||Will you publish my name or address?⟧</summary><p>⟦No. En este sitio solo mostramos totales por distrito.||No. This site only shows totals by district.⟧</p></details>
       <details><summary>⟦¿Y si no es una chirimacha?||What if it isn't a chirimacha?⟧</summary><p>⟦Igual te respondemos. La mayoría de los reportes no son chirimachas, y preferimos revisar.||We still reply. Most reports are not chirimachas, and we would rather check.⟧</p></details>
+      <details><summary>⟦¿Qué hago si la aplasté?||What if I squashed it?⟧</summary><p>⟦<mark class="tbc" title="Por confirmar con el equipo">No la toques con las manos. Recógela con una bolsa y limpia el lugar con lejía, siguiendo las indicaciones de la etiqueta.</mark> Igual puedes tomarle una foto y enviarla.||<mark class="tbc" title="To confirm with the team">Don't touch it with bare hands. Pick it up with a bag and clean the spot with bleach, following the label.</mark> You can still take a photo and send it.⟧</p></details>
       <details><summary>⟦¿Qué hago si me picó?||What should I do if it bit me?⟧</summary><p>⟦<mark class="tbc" title="Por confirmar con el equipo">Acude a tu establecimiento de salud más cercano. Si puedes, lleva el insecto en un frasco cerrado.</mark>||<mark class="tbc" title="To confirm with the team">Go to your nearest health facility. If you can, bring the insect in a closed jar.</mark>⟧</p></details>
     </div>
   </div>
@@ -436,6 +551,12 @@ footer .fine{flex-basis:100%;font-size:.8rem;opacity:.8}
       <p>⟦<b>La investigación.</b> Un estudio sobre los primeros 26 meses de Alerta Chirimacha, publicado en 2023:||<b>The research.</b> A study of Alerta Chirimacha's first 26 months, published in 2023:⟧</p>
       <p style="margin-top:8px"><a href="https://doaj.org/article/b79d628a9df244229518f3d67ce0c716" target="_blank" rel="noopener">Tamayo LD, et al. <i>PLOS Neglected Tropical Diseases</i> 17(10), 2023 ↗</a></p>
       <p style="margin-top:12px">⟦De 206 reportes, 11 fueron <i>Triatoma infestans</i>. El sistema tuvo un 57 % más de reportes confirmados que el sistema tradicional.||Of 206 reports, 11 were <i>Triatoma infestans</i>. The system had 57% more confirmed reports than the traditional system.⟧</p>
+      <p style="margin-top:16px">⟦<b>Otras fuentes de esta página</b>||<b>Other sources for this page</b>⟧</p>
+      <ul class="sources">
+        <li>⟦Kissing Bug Community Science Program, Texas A&amp;M: <a href="https://kissingbug.tamu.edu/found-a-bug/" target="_blank" rel="noopener">«Found a bug?» ↗</a> (pasos para atraparla y anotar datos).||Kissing Bug Community Science Program, Texas A&amp;M: <a href="https://kissingbug.tamu.edu/found-a-bug/" target="_blank" rel="noopener">“Found a bug?” ↗</a> (steps for catching it and taking notes).⟧</li>
+        <li>⟦Foto, video y registro de reportes: Alerta Chirimacha.||Photo, video and report log: Alerta Chirimacha.⟧</li>
+        <li>⟦Mapa: INEI, OpenStreetMap y Terrain Tiles (ver créditos debajo del mapa).||Map: INEI, OpenStreetMap and Terrain Tiles (see the credits under the map).⟧</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -445,7 +566,7 @@ footer .fine{flex-basis:100%;font-size:.8rem;opacity:.8}
   <div class="wrap">
     <span class="slogan">¡Arequipa sin chirimachas!</span>
     <p>WhatsApp <b>989 279 579</b> · <a href="https://www.facebook.com/AlertaChirimacha/" target="_blank" rel="noopener">Facebook ↗</a></p>
-    <p class="fine">⟦Borrador del sitio de Alerta Chirimacha, noviembre de 2026. Para revisión del equipo; todavía no es un canal oficial.||Draft of the Alerta Chirimacha website, November 2026. For team review; not an official channel yet.⟧</p>
+    <p class="fine">⟦Borrador del sitio de Alerta Chirimacha, noviembre de 2026. Para revisión del equipo; todavía no es un canal oficial. Mapa © colaboradores de OpenStreetMap, INEI (CC BY-SA 4.0), Terrain Tiles.||Draft of the Alerta Chirimacha website, November 2026. For team review; not an official channel yet. Map © OpenStreetMap contributors, INEI (CC BY-SA 4.0), Terrain Tiles.⟧</p>
   </div>
 </footer>
 
@@ -455,6 +576,7 @@ footer .fine{flex-basis:100%;font-size:.8rem;opacity:.8}
 (function(){
 const root = document.documentElement;
 const DATA = @@DATA_JSON@@;
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 
 /* ---------- language (Spanish is the page's main language) ---------- */
 let LANG = 'es';
@@ -464,12 +586,13 @@ const ATTRS = ['aria-label', 'title', 'alt', 'content'];
 function setLang(l){
   LANG = l === 'en' ? 'en' : 'es';
   root.setAttribute('data-lang', LANG); root.lang = LANG;
-  document.querySelectorAll('[data-en]').forEach(e => { if(!e.hasAttribute('data-es')) e.setAttribute('data-es', e.textContent); e.textContent = e.getAttribute(LANG === 'en' ? 'data-en' : 'data-es'); });
-  ATTRS.forEach(a => document.querySelectorAll('[data-en-' + a + ']').forEach(e => { const k = 'data-es-' + a; if(!e.hasAttribute(k)) e.setAttribute(k, e.getAttribute(a) || ''); e.setAttribute(a, e.getAttribute(LANG === 'en' ? 'data-en-' + a : k)); }));
-  document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.l === LANG)));
+  $$('[data-en]').forEach(e => { if(!e.hasAttribute('data-es')) e.setAttribute('data-es', e.textContent); e.textContent = e.getAttribute(LANG === 'en' ? 'data-en' : 'data-es'); });
+  ATTRS.forEach(a => $$('[data-en-' + a + ']').forEach(e => { const k = 'data-es-' + a; if(!e.hasAttribute(k)) e.setAttribute(k, e.getAttribute(a) || ''); e.setAttribute(a, e.getAttribute(LANG === 'en' ? 'data-en-' + a : k)); }));
+  $$('.lang button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.l === LANG)));
   subs.forEach(fn => fn());
 }
-document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => { setLang(b.dataset.l); try{ localStorage.setItem('ac-lang', LANG); }catch(e){} }));
+function setAria(el, es, en){ el.setAttribute('data-es-aria-label', es); el.setAttribute('data-en-aria-label', en); el.setAttribute('aria-label', LANG === 'en' ? en : es); }
+$$('.lang button').forEach(b => b.addEventListener('click', () => { setLang(b.dataset.l); try{ localStorage.setItem('ac-lang', LANG); }catch(e){} }));
 (function(){
   let l = null;
   try{ l = new URLSearchParams(location.search).get('lang'); }catch(e){}
@@ -481,31 +604,146 @@ document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click
 /* ---------- phone report bar: appears once the hero button is out of view ---------- */
 root.classList.add('js');
 (function(){
-  const bar = document.querySelector('.mbar'), heroBtn = document.querySelector('.hero .btn-wa');
+  const bar = $('.mbar'), heroBtn = $('.hero .btn-wa');
   if(!('IntersectionObserver' in window) || !bar || !heroBtn){ if(bar) bar.classList.add('show'); return; }
   new IntersectionObserver(es => es.forEach(e => bar.classList.toggle('show', !e.isIntersecting))).observe(heroBtn);
 })();
 
-/* ---------- district map ---------- */
-const tiles = [...document.querySelectorAll('.tile')];
-const byName = Object.fromEntries(DATA.districts.map(x => [x.d, x]));
-const total = DATA.districts.reduce((s, x) => s + x.reports, 0);
-const pName = document.getElementById('pName'), pRep = document.getElementById('pRep'), pConf = document.getElementById('pConf'), pNote = document.getElementById('pNote');
-let sel = null;
-function render(){
-  const x = sel ? byName[sel] : null;
-  pName.textContent = x ? x.d : L('Toda la provincia', 'Whole province');
-  pRep.textContent = String(x ? x.reports : total);
-  pConf.textContent = (x && x.confirmed != null) ? String(x.confirmed) : L('Por definir con el equipo', 'To be decided with the team');
-  pNote.textContent = DATA.sample ? L('Datos de ejemplo: no son reportes reales.', 'Sample data: not real reports.') : '';
-  tiles.forEach(t => { const on = t.dataset.d === sel; t.classList.toggle('sel', on); t.setAttribute('aria-pressed', String(on)); });
-}
-function pick(t){ sel = (sel === t.dataset.d) ? null : t.dataset.d; render(); }
-tiles.forEach(t => {
-  t.addEventListener('click', () => pick(t));
-  t.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); pick(t); } });
+/* ---------- map: views, zoom and pan ---------- */
+const wrap = $('.mapwrap');
+const V = {};
+$$('.msvg').forEach(svg => {
+  const key = svg.dataset.view, W = +svg.dataset.w, H = +svg.dataset.h;
+  const items = [...svg.querySelectorAll('.bub,.lb,.pk,.pl,.rv')].map(g => {
+    const m = /translate\(([-\d.]+)[ ,]+([-\d.]+)\)/.exec(g.getAttribute('transform') || '');
+    return {g, x: m ? +m[1] : 0, y: m ? +m[2] : 0, k: g.classList.contains('bub') ? 'b' : g.classList.contains('lb') ? 'l' : 'm'};
+  });
+  V[key] = {svg, key, W, H, vb: [0, 0, W, H], items, mpu: DATA.views[key].mpu, fs: key === 'city' ? 16 : 15};
 });
-subs.push(render); render();
+let VIEW = 'city', suppress = 0;
+const zIn = $('#zIn'), zOut = $('#zOut'), zReset = $('#zReset'), hint = $('.maphint'), sBar = $('.mscale .bar'), sTxt = $('.mscale b');
+const pxu = v => (v.svg.getBoundingClientRect().width || 1) / v.vb[2];
+function apply(v){
+  const [x, y, w, h] = v.vb;
+  v.svg.setAttribute('viewBox', x.toFixed(1) + ' ' + y.toFixed(1) + ' ' + w.toFixed(1) + ' ' + h.toFixed(1));
+  const z = v.W / w, sb = Math.pow(z, -0.55), sl = Math.pow(z, -0.5), sm = Math.pow(z, -0.7);
+  v.items.forEach(o => o.g.setAttribute('transform', 'translate(' + o.x + ' ' + o.y + ') scale(' + (o.k === 'b' ? sb : o.k === 'l' ? sl : sm).toFixed(3) + ')'));
+  const p = pxu(v), fpx = v.fs * sl * p;
+  v.svg.classList.toggle('lbl-off', fpx < 7.5);
+  v.svg.classList.toggle('lbl-min', fpx < 9.5);
+  v.svg.classList.toggle('zoomed', z > 1.01);
+  if(v.key !== VIEW) return;
+  const mPerPx = v.mpu / p, target = 90 * mPerPx;
+  let m = 100; [100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000].forEach(s => { if(s <= target * 1.3) m = s; });
+  sBar.style.width = Math.round(m / mPerPx) + 'px';
+  sTxt.textContent = m >= 1000 ? (m / 1000) + ' km' : m + ' m';
+  zOut.disabled = zReset.disabled = z <= 1.01; zIn.disabled = z >= 7.9;
+  hint.hidden = fpx >= 7.5;
+}
+function clampVB(v, x, y, w){
+  w = Math.max(v.W / 8, Math.min(v.W, w)); const h = w * v.H / v.W;
+  return [Math.max(0, Math.min(v.W - w, x)), Math.max(0, Math.min(v.H - h, y)), w, h];
+}
+function zoomAt(v, f, ux, uy){
+  const [x, y, w] = v.vb, nw = w / f;
+  v.vb = clampVB(v, ux - (ux - x) * nw / w, uy - (uy - y) * nw / w, nw); apply(v);
+}
+function units(v, cx, cy){ const r = v.svg.getBoundingClientRect(), p = r.width / v.vb[2]; return [v.vb[0] + (cx - r.left) / p, v.vb[1] + (cy - r.top) / p]; }
+function setView(k){
+  VIEW = k; wrap.dataset.view = k;
+  $$('[data-viewbtn]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.viewbtn === k)));
+  apply(V[k]);
+}
+$$('[data-viewbtn]').forEach(b => b.addEventListener('click', () => setView(b.dataset.viewbtn)));
+zIn.addEventListener('click', () => { const v = V[VIEW], [x, y, w, h] = v.vb; zoomAt(v, 1.8, x + w / 2, y + h / 2); });
+zOut.addEventListener('click', () => { const v = V[VIEW], [x, y, w, h] = v.vb; zoomAt(v, 1 / 1.8, x + w / 2, y + h / 2); });
+zReset.addEventListener('click', () => { const v = V[VIEW]; v.vb = [0, 0, v.W, v.H]; apply(v); });
+Object.values(V).forEach(v => {
+  let drag = null;
+  v.svg.addEventListener('pointerdown', e => { if(v.W / v.vb[2] > 1.01 && e.button === 0) drag = {id: e.pointerId, x: e.clientX, y: e.clientY, vb: v.vb.slice(), moved: false}; });
+  v.svg.addEventListener('pointermove', e => {
+    if(!drag || e.pointerId !== drag.id) return;
+    const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if(!drag.moved){ if(Math.hypot(dx, dy) < 5) return; drag.moved = true; try{ v.svg.setPointerCapture(e.pointerId); }catch(_){} v.svg.classList.add('dragging'); }
+    const p = (v.svg.getBoundingClientRect().width || 1) / drag.vb[2];
+    v.vb = clampVB(v, drag.vb[0] - dx / p, drag.vb[1] - dy / p, drag.vb[2]); apply(v);
+  });
+  const end = () => { if(drag && drag.moved) suppress = Date.now(); drag = null; v.svg.classList.remove('dragging'); };
+  v.svg.addEventListener('pointerup', end); v.svg.addEventListener('pointercancel', end);
+  v.svg.addEventListener('dblclick', e => { e.preventDefault(); const [ux, uy] = units(v, e.clientX, e.clientY); zoomAt(v, 2, ux, uy); });
+});
+$$('.m-goto').forEach(g => {
+  g.addEventListener('click', e => { e.stopPropagation(); if(Date.now() - suppress > 300) setView('city'); });
+  g.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); setView('city'); } });
+});
+let rT; window.addEventListener('resize', () => { clearTimeout(rT); rT = setTimeout(() => apply(V[VIEW]), 120); });
+
+/* ---------- map: data, year filter, selection ---------- */
+const by = Object.fromEntries(DATA.districts.map(x => [x.d, x]));
+const YEARS = DATA.years, S = DATA.summary;
+let YEAR = 'all', SEL = null;
+const MES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const MEN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const ym = (iso, l) => { const [y, m] = iso.split('-'); return l === 'en' ? MEN[m - 1] + ' ' + y : MES[m - 1] + ' de ' + y; };
+const count = (x, y) => y === 'all' ? Object.values(x.y).reduce((a, v) => [a[0] + v[0], a[1] + v[1]], [0, 0]) : (x.y[y] || [0, 0]);
+const rad = (n, k) => n > 0 ? Math.max(3.2, DATA.rmax[k] * Math.sqrt(n / DATA.nmax)) : 0;
+const plural = (n, es1, esN, en1, enN) => [n + ' ' + (n === 1 ? es1 : esN), n + ' ' + (n === 1 ? en1 : enN)];
+function updateBubbles(){
+  Object.values(V).forEach(v => v.svg.querySelectorAll('.bub').forEach(g => {
+    const [n, k] = count(by[g.dataset.d], YEAR), r = rad(n, v.key);
+    g.querySelector('.br').setAttribute('r', r.toFixed(1));
+    const rb = DATA.badge[v.key], bk = g.querySelector('.bk'), bx = (r * 0.72 + (r < rb * 1.5 ? rb * 0.55 : 0)).toFixed(1);
+    bk.setAttribute('transform', 'translate(' + bx + ' ' + bx + ')'); bk.querySelector('text').textContent = k;
+    if(k) bk.removeAttribute('hidden'); else bk.setAttribute('hidden', '');
+    const t = g.querySelector('.bn'); t.textContent = r >= 8 ? String(n) : ''; t.style.fontSize = Math.max(9, r * 0.8).toFixed(1) + 'px';
+    if(n === 0) g.setAttribute('hidden', ''); else g.removeAttribute('hidden');
+    const a = plural(n, 'reporte', 'reportes', 'report', 'reports'), b = plural(k, 'chirimacha confirmada', 'chirimachas confirmadas', 'confirmed chirimacha', 'confirmed chirimachas');
+    setAria(g, g.dataset.d + ': ' + a[0] + ', ' + b[0], g.dataset.d + ': ' + a[1] + ', ' + b[1]);
+  }));
+}
+const tbody = $('details.tbl tbody'), rows = [...tbody.querySelectorAll('tr')];
+function updateTable(){
+  rows.forEach(r => { const [n, k] = count(by[r.dataset.d], YEAR); r.children[1].textContent = n; r.children[2].textContent = k; r._n = n; });
+  rows.slice().sort((a, b) => b._n - a._n || a.dataset.d.localeCompare(b.dataset.d, 'es')).forEach(r => tbody.appendChild(r));
+}
+const pName = $('#pName'), pPer = $('#pPer'), pRep = $('#pRep'), pConf = $('#pConf'), pBars = $('#pBars'), pNote = $('#pNote'), pClear = $('#pClear'), tCap = $('#tCap');
+function render(){
+  const x = SEL ? by[SEL] : null;
+  let n = 0, k = 0, series;
+  if(x){ [n, k] = count(x, YEAR); series = YEARS.map(y => (x.y[y] || [0, 0])[0]); }
+  else { DATA.districts.forEach(d => { const c = count(d, YEAR); n += c[0]; k += c[1]; }); series = YEARS.map(y => DATA.districts.reduce((a, d) => a + (d.y[y] || [0, 0])[0], 0)); }
+  const per = YEAR === 'all' ? L(ym(S.first, 'es') + ' a ' + ym(S.last, 'es'), ym(S.first, 'en') + ' to ' + ym(S.last, 'en')) : String(YEAR);
+  pName.textContent = x ? x.d : L('Provincia de Arequipa', 'Arequipa province');
+  pPer.textContent = per;
+  pRep.textContent = n; pConf.textContent = k;
+  const mx = Math.max(1, ...series);
+  pBars.style.setProperty('--n', YEARS.length);
+  pBars.innerHTML = YEARS.map((y, i) => '<div class="' + (YEAR === y ? 'on' : '') + '"><b>' + series[i] + '</b><i style="height:' + Math.round(series[i] / mx * 78) + 'px"></i><span>' + "'" + String(y).slice(2) + '</span></div>').join('');
+  pNote.textContent = x ? (n === 0 ? L('Sin reportes en este periodo.', 'No reports in this period.') : '')
+    : L('Además, ' + S.outside + ' reportes vinieron de otras provincias o regiones, o no tienen distrito.', 'Another ' + S.outside + ' reports came from other provinces or regions, or have no district.');
+  pClear.hidden = !x;
+  tCap.textContent = L('Reportes por distrito, ', 'Reports by district, ') + per;
+  $$('.dist,.bub,.lb,details.tbl tbody tr').forEach(el => el.classList.toggle('sel', !!SEL && el.dataset.d === SEL));
+}
+function select(d){ SEL = (SEL === d) ? null : d; render(); }
+$$('.dist,.bub').forEach(el => {
+  el.addEventListener('click', e => { if(Date.now() - suppress < 300) return; e.stopPropagation(); select(el.dataset.d); });
+});
+$$('.bub').forEach(el => el.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); select(el.dataset.d); } }));
+rows.forEach(r => r.addEventListener('click', () => select(r.dataset.d)));
+pClear.addEventListener('click', () => { SEL = null; render(); });
+$('#yearSel').addEventListener('change', e => { YEAR = e.target.value === 'all' ? 'all' : +e.target.value; updateBubbles(); updateTable(); render(); });
+updateBubbles(); updateTable();
+subs.push(render, updateBubbles); render();
+requestAnimationFrame(() => apply(V[VIEW]));
+
+/* ---------- video chapters ---------- */
+const vid = $('#vid'), chap = $$('.chapters button'), starts = chap.map(b => +b.dataset.t);
+chap.forEach(b => b.addEventListener('click', () => {
+  const t = +b.dataset.t, go = () => { try{ vid.currentTime = t; }catch(_){} const p = vid.play(); if(p && p.catch) p.catch(() => {}); };
+  if(vid.readyState >= 1) go(); else { vid.addEventListener('loadedmetadata', go, {once: true}); vid.load(); }
+}));
+vid.addEventListener('timeupdate', () => { const t = vid.currentTime; chap.forEach((b, i) => b.classList.toggle('on', t >= starts[i] && t < (i + 1 < starts.length ? starts[i + 1] : 1e9))); });
 })();
 </script>
 </body>
