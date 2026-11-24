@@ -1,0 +1,29 @@
+{
+  "source": "Alerta Chirimacha report log (team spreadsheet, kept outside this repository)",
+  "generated": "2026-11-23",
+  "first_report": "2020-10-03",
+  "last_report": "2026-10-22",
+  "reports_total": 708,
+  "by_place": {
+    "province": 440,
+    "other_provinces_arequipa_region": 20,
+    "province_no_district": 14,
+    "other_regions": 33,
+    "no_location": 201
+  },
+  "identified_by_team": 493,
+  "triatoma_infestans": {
+    "total": 29,
+    "province": 28,
+    "other_regions": 1
+  },
+  "province_reports_by_year": {
+    "2020": 38,
+    "2021": 79,
+    "2022": 88,
+    "2023": 101,
+    "2024": 31,
+    "2025": 41,
+    "2026": 62
+  }
+}
