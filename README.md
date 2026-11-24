@@ -1,35 +1,45 @@
 # Alerta Chirimacha website
 
-Draft website for Alerta Chirimacha, the community surveillance system for chirimachas (*Triatoma infestans*) in Arequipa, Peru. Residents report an insect by WhatsApp; the site also shows reports by district.
+Draft website for Alerta Chirimacha, the community surveillance system for chirimachas (*Triatoma infestans*) in Arequipa, Peru. Residents report an insect by WhatsApp; the site also shows where reports come from on a map of the city and the province.
 
 Everything here is a **draft for the team's review**, not the official site yet.
 
-- **Plan:** [PLAN.md](PLAN.md): audience, decisions, site map, privacy, map options, open questions.
+- **Plan:** [PLAN.md](PLAN.md): audience, decisions, site map, data and privacy, the map, open questions.
 - **Context for anyone picking up the work:** [HANDOFF.md](HANDOFF.md).
 
 ## View the draft
 
-Open `site/index.html` in a browser. It is one self-contained file. Spanish is the default; the EN button (or `?lang=en` / `#en` at the end of the address) switches to English.
+Open `site/index.html` in a browser (keep the `site/` folder together: the page uses `assets/` and `media/`). Spanish is the default; the EN button (or `?lang=en` / `#en` at the end of the address) switches to English.
 
 ## Folders
 
 - `site/index.html`: the built page. Don't edit it by hand.
 - `site/source/template.html`: the page source. Bilingual text is written as `⟦Español||English⟧` (Spanish first), or `⟪Español||English⟫` inside SVG text.
-- `site/source/build.py`: draws the district map and builds `site/index.html`.
-- `site/data/districts.csv`: the 29 districts of Arequipa province and their place on the hexagon map.
-- `site/data/reports-by-district.sample.csv`: **made-up** counts used until real data arrives.
+- `site/source/build.py` and `mapdraw.py`: build `site/index.html`, including the map.
+- `site/data/districts.csv`: the 29 districts of Arequipa province, their map labels and INEI ubigeo codes.
+- `site/data/reports-by-district.csv`, `reports-summary.json`: report counts by district and year (no personal data).
+- `site/data/map/`: the base map layers and their sources ([README](site/data/map/README.md)).
+- `site/assets/`, `site/media/`: the team's photo and video (web versions).
+- `tools/`: scripts that make the data files.
 
 ## Rebuild
 
-From `site/source/`:
+From `site/source/` (Python 3, no extra packages):
 
 ```
 python3 build.py template.html ../data ../index.html
 ```
 
-## Add the real report counts
+## Update the report counts
 
-1. Create `site/data/reports-by-district.csv` with the columns `district,reports,confirmed`, using exactly the district names in `districts.csv` (leave `confirmed` empty if it should not be shown).
-2. Rebuild. When this file exists, the build uses it instead of the sample file, and the "DATOS DE EJEMPLO / SAMPLE DATA" labels disappear.
+1. Get the latest report spreadsheet from the team. **Keep it outside this repository**: it has residents' names, phone numbers and addresses.
+2. From the repository root (needs pandas and openpyxl):
 
-Only totals per district go in this file: never addresses, names, phone numbers or coordinates.
+   ```
+   python3 tools/aggregate_reports.py /path/to/Denuncias_Alerta_Chirimacha.xlsx site/data
+   ```
+
+   It reads only the date, district and insect columns and writes district totals by year.
+3. Rebuild the page.
+
+Only totals per district go into `site/data`: never addresses, names, phone numbers or coordinates of homes.

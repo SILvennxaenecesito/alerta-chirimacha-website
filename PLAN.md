@@ -1,6 +1,6 @@
 # Alerta Chirimacha website: plan
 
-Draft v1, November 2026, for review by the Alerta Chirimacha team. Everything here is a proposal; the open questions at the end need the team's answers before launch.
+Draft v2, November 2026, for review by the Alerta Chirimacha team. Everything here is a proposal; the open questions at the end need the team's answers before launch.
 
 ## Why a website
 
@@ -10,17 +10,23 @@ Draft v1, November 2026, for review by the Alerta Chirimacha team. Everything he
 ## Who it is for
 
 1. **Residents of Arequipa who found an insect** (main audience). Spanish speakers on phones, sometimes with slow connections. They need one thing: how to report, right away.
-2. **People curious about results.** A simple district-level view of reports.
+2. **People curious about results.** Where reports come from, on a real map of the city and the province.
 3. **Partners and researchers.** A short "about" section and a link to the published study.
 
-## Decisions so far (Nov 18 planning meeting)
+## Decisions so far
 
+From the Nov 18 planning meeting:
 - Reporting links to the **WhatsApp number**, not a web form. People want to know that someone will answer.
 - Reports are mapped at the **district level**. Most reports only record district and province, and aggregating protects the people who report.
 - The site uses the **color scheme of the Facebook page**, and its content is adapted from the Facebook page.
-- The team's existing **Spanish videos** go on the page (one full video, about 4 minutes, plus shorter clips). No new videos are made.
+- The team's existing **Spanish video** goes on the page. No new videos are made.
 - **Short text.** Other reporting sites were judged to carry too much information.
-- The idea of a gallery of look-alike insects was dropped: people don't look closely at bugs.
+- A gallery of look-alike insects was dropped: people don't look closely at bugs. The draft keeps one sentence on look-alikes instead.
+
+From the review of draft v1:
+- Use a **real photo** of a chirimacha (from the team's Facebook alert), not an illustration.
+- Use a **real map** where people can see the geography, with the reports highlighted, instead of the schematic hexagons.
+- Use other programs' guidance as a reference, in particular Texas A&M's ["Found a bug?"](https://kissingbug.tamu.edu/found-a-bug/) page.
 
 ## Site map
 
@@ -28,61 +34,69 @@ One page, Spanish first, with an English toggle. On phones, a "Reportar por What
 
 | # | Section | What it does |
 |---|---|---|
-| 1 | Report (top) | "¿Encontraste una chirimacha?", the WhatsApp button and the number in large type. "Free · No app needed · We never publish names or addresses." |
-| 2 | How to report | Three steps: don't touch or squash it (trap it in a jar or bag), take a photo, send it with your district. Then what happens next, and a reminder that most reports are not chirimachas (11 of the first 206). |
-| 3 | What is the chirimacha | Three short facts: nocturnal blood feeder; hides in wall cracks and animal pens; wingless young are chirimachas too. |
-| 4 | Reports by district | Map of the 29 districts of Arequipa province. Tap a district to see its numbers. Privacy note. Table view for accessibility. |
+| 1 | Report (top) | "¿Encontraste una chirimacha?", the WhatsApp button and the number in large type, and the team's photo of an adult chirimacha. "Free · No app needed · We never publish names or addresses." |
+| 2 | How to report | Three steps adapted from Texas A&M: don't touch it (catch it with a bag or glove, keep it closed in a jar or bag); note when and where (date, time, inside or outside, possible bites); photo and WhatsApp with your district. A note on squashed insects. What happens next. "29 of 493 identified insects were chirimachas." |
+| 3 | Recognize it | The photo with numbered features: cone-shaped head, thin antennae and legs, flat dark body, striped edge. Three short facts (night, hiding places, wingless young), and one sentence on look-alikes. |
+| 4 | Reports by district | Real map: elevation, built-up area, Río Chili, main roads, volcanoes and district boundaries. A circle per district (bigger = more reports) with a badge for confirmed chirimachas. City and province views, zoom, a year filter, a panel with reports per year, a table, and a privacy note. |
 | 5 | Alerts | How neighborhood alerts work, the latest alert, and a link to all alerts on Facebook. |
-| 6 | Videos | The team's Spanish videos. |
-| 7 | FAQ | Cost, apps, privacy, what if it isn't a chirimacha, what to do after a bite. |
-| 8 | About | What Alerta Chirimacha is, who runs it, and a link to the 2023 study. Footer with the slogan, WhatsApp and Facebook. |
+| 6 | Video | The team's animated video (2 min 17 s) with four chapters. |
+| 7 | FAQ | Cost, apps, privacy, what if it isn't a chirimacha, a squashed insect, a bite. |
+| 8 | About | What Alerta Chirimacha is, who runs it, the 2023 study, other sources. Footer with the slogan, WhatsApp, Facebook and map credits. |
 
 ## Data and privacy
 
-- The site shows **only totals per district**: never homes, addresses, names or phone numbers.
-- Counts live in one file, `site/data/reports-by-district.csv` (columns `district, reports, confirmed`). The team updates it and rebuilds the page. Until that file exists, the build uses made-up sample numbers and labels them "DATOS DE EJEMPLO" on the map, the panel and the table.
+- The site shows **only totals per district**: never homes, addresses, names or phone numbers. Each circle sits in the middle of its district's built-up area, not on a home.
+- `tools/aggregate_reports.py` reads the team's report spreadsheet and writes two small files: `site/data/reports-by-district.csv` (`district, year, reports, confirmed`) and `site/data/reports-summary.json` (date range and totals). It loads only the activity, date, province, district and insect-identification columns, so names, phone numbers and addresses are never read.
+- **The spreadsheet itself never goes into this repository** (it has residents' names, phones and addresses). `.gitignore` blocks spreadsheet files as a safeguard.
+- Counting rules (to confirm with the team): a report is a row whose activity is DENUNCIA or REPORTE; "confirmed" means the team identified *Triatoma infestans*; DISTRITO = PEDREGAL is El Pedregal in Majes (Caylloma), outside the province; report numbers restart in 2022, so nothing is de-duplicated.
+- The current file covers October 2020 to October 2026: 708 reports, 440 with a district in Arequipa province (28 confirmed *T. infestans*), 268 from other provinces, other regions or with no district.
 - **Photos (later).** Following the meeting, only photos of reported insects that are not dangerous. Before publishing: remove location metadata (EXIF/GPS) and crop out anything that could identify a home.
-- Whether to show **confirmed chirimachas per district** publicly is an open question; the draft leaves that value as "to be decided".
 
-## The map: three options (open question)
+## The map
 
-| Option | Pros | Cons |
-|---|---|---|
-| **A. Our own district map from the lab's counts** (the draft uses a schematic hexagon layout; it can move to real district boundaries from INEI or geoBoundaries, with attribution) | Full control over privacy; light and fast; matches the site's design; works on slow phones | The team has to update the counts file |
-| B. The lab's own georeferences, aggregated to districts | Most accurate | Same work as A plus geocoding; very few reports have localities |
-| C. Embed the iNaturalist map | Already exists; iNaturalist obscures exact locations | Depends on iNaturalist permissions; mixes in non-chirimacha observations; heavier page; outside our design |
+Option A from draft v1, now with real geography: our own map, drawn at build time from four open sources, with the lab's district counts on top.
 
-**Suggestion:** A, with a link to the iNaturalist observations for anyone who wants more.
+- District boundaries: INEI, via perugeopkg (CC BY-SA 4.0).
+- Streets, rivers, lakes, built-up area, volcanoes, Plaza de Armas: OpenStreetMap (ODbL), via OpenFreeMap vector tiles.
+- Elevation bands: Terrain Tiles on AWS Open Data (SRTM).
+
+Why not a tile map (Google Maps, Leaflet with OpenStreetMap tiles): the page would depend on outside servers and send every visitor's address to them, it would be heavier on slow phones, and it would not work in the review previews. The built map is plain SVG inside the page, with no API keys and no tracking. If the team later wants street-level detail, a tile map can be added as an extra view.
+
+Not chosen: the lab's own georeferences (very few reports have localities) and an iNaturalist embed (mixes in non-chirimacha observations). A link to the iNaturalist observations can still be added.
 
 ## How it is built
 
-- One self-contained HTML file (about 60 KB): no server, no database, no tracking. It loads quickly on slow connections.
-- Source: `site/source/template.html` (bilingual text as `⟦Español||English⟧`) and `site/source/build.py`, which draws the district map from `site/data/` and builds `site/index.html`.
-- Hosting options are the same as for the lab site: GitHub Pages, a Penn alias, or a domain the lab owns. This is not decided yet. At launch: remove the draft banner and the `noindex` tag, and add the site's address to the Facebook page.
+- One HTML page (about 270 KB, of which the map is 190 KB) plus the photo (100 KB) and the video (7 MB, loaded only when played). No server, no database, no tracking.
+- Source: `site/source/template.html` (bilingual text as `⟦Español||English⟧`), `site/source/build.py` and `site/source/mapdraw.py`. The build needs only Python.
+- Hosting options are the same as for the lab site: GitHub Pages, a Penn alias, or a domain the lab owns. This is not decided yet. At launch: remove the draft banner and the `noindex` tag, and add the site's address to the Facebook page. The video could also live on YouTube or Facebook to save bandwidth.
 
 ## Phases
 
-1. **Draft v1 (this pull request):** structure, Spanish and English copy, sample map.
-2. **Content from the team:** confirm the WhatsApp number, partner names, what happens after a report, and the bite advice; send the videos, photos and district counts.
-3. **Real data and review:** real counts and map, Spanish review by native speakers, test on low-end Android phones.
+1. **Draft v1:** structure, Spanish and English copy, sample map.
+2. **Draft v2 (this pull request):** real photo, real map with the team's counts, video with chapters, steps and identification guide adapted from Texas A&M.
+3. **Team review:** confirm the counting rules and publishing the counts, the safety wording, credits for the photo and video, partner names. Spanish review by native speakers; test on low-end Android phones.
 4. **Launch:** hosting decision; remove the draft banner after approval; link from the Facebook page.
-5. **Later:** a Texas version if Alerta Chirimacha starts there.
+5. **Later:** photos of reported insects that are not dangerous; a Texas version if Alerta Chirimacha starts there.
 
 ## Open questions for the team
 
 1. Is **989 279 579** the right WhatsApp number to publish?
-2. What happens after a report is confirmed? The draft says: "we arrange an inspection of your home and alert your neighbors" (marked *por confirmar*).
-3. Show confirmed chirimachas per district, or only total reports?
-4. Show the full list of neighborhood alerts on the site, or only link to Facebook?
-5. Which partner names (and logos, if any) can appear? The draft names Universidad Peruana Cayetano Heredia, the University of Pennsylvania and the Gerencia Regional de Salud de Arequipa, marked *por confirmar*. It shows no logos.
-6. Wording for the bite question in the FAQ.
-7. Which photos can be shown, with what credit?
-8. Map option A, B or C?
-9. Hosting and domain.
+2. Can the real counts be published as shown (all reports by district and year, plus confirmed *T. infestans*)? Should very small counts be grouped ("1–2")?
+3. Are the counting rules above right (which rows count as reports, what "confirmed" means, Pedregal = Majes)?
+4. Safety wording: catching the insect with a bag or glove, the closed container, cleaning a squashed insect with bleach, the bite advice. Should residents also keep or freeze the insect for pickup (Texas A&M suggests freezing)?
+5. What happens after a report is confirmed? The draft says: "we arrange an inspection of your home and alert your neighbors" (marked *por confirmar*).
+6. Photo: who took the photo used in the April 2026 alert, and can we have the original file? The draft crops it from the Facebook post.
+7. Video credits and version (the end card shows the Arequipa regional government and health office).
+8. Which partner names (and logos, if any) can appear?
+9. Show the full list of neighborhood alerts on the site, or only link to Facebook?
+10. Hosting and domain.
 
 ## Sources used in the draft
 
-- Facebook page: https://www.facebook.com/AlertaChirimacha/ (colors, the WhatsApp number, the example alert of April 13, 2026, the slogan).
+- Facebook page: https://www.facebook.com/AlertaChirimacha/ (colors, the WhatsApp number, the example alert of April 13, 2026, the photo, the slogan).
+- Alerta Chirimacha report log (team spreadsheet, not in this repository), October 2020 to October 2026.
+- The team's video (CHAGAS_Final_v2, 2022) and its four parts.
 - Tamayo LD, Condori-Pino CE, Sanchez Z, Gonçalves R, Málaga Chávez FS, Castillo-Neyra R, Levy MZ, Paz-Soldan VA. *PLOS Neglected Tropical Diseases* 17(10), 2023. https://doaj.org/article/b79d628a9df244229518f3d67ce0c716 (first 26 months: 206 reports, 11 *T. infestans*; 57% more confirmed reports than the traditional system).
-- Safety advice follows CDC's triatomine guidance (don't touch or squash the bug; capture it in a container): https://www.cdc.gov/parasites/chagas/gen_info/vectors
-- The 29 districts of Arequipa province. Their INEI ubigeo codes (040101–040129) are in `site/data/districts.csv`; check them before joining the lab's data.
+- Texas A&M Kissing Bug Community Science Program, "Found a bug?": https://kissingbug.tamu.edu/found-a-bug/ (handling, closed container, notes to record, squashed insects, identification traits). Its statement that no other insects carry the parasite was **not** copied: the lab showed in the laboratory that bed bugs can transmit *T. cruzi* (Salazar R, Castillo-Neyra R, Tustin AW, Borrini-Mayorí K, Náquira C, Levy MZ. *Am J Trop Med Hyg* 92(2):331–335, 2015. doi:10.4269/ajtmh.14-0483).
+- CDC triatomine guidance (don't touch or squash the bug; capture it in a container): https://www.cdc.gov/parasites/chagas/gen_info/vectors
+- Map: INEI via perugeopkg (CC BY-SA 4.0), OpenStreetMap contributors (ODbL), Terrain Tiles on AWS Open Data. Details in `site/data/map/README.md`.
