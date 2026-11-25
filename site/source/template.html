@@ -84,10 +84,9 @@ section{padding-block:clamp(56px,9vw,104px)}
 .num small{display:block;font:700 .72rem/1.3 var(--f-body);letter-spacing:.1em;text-transform:uppercase;color:var(--brown);opacity:.75}
 .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
 .pills>span{background:rgba(255,255,255,.55);border:1.5px solid rgba(61,37,17,.25);color:var(--brown);font-weight:700;font-size:.86rem;border-radius:999px;padding:.35em .85em}
-/* photo: cropped from the team's April 2026 Facebook alert; the red tag covers a spot where the poster's text crossed one leg */
+/* photo: the team's chirimacha photo from the Alerta Chirimacha Facebook cover, rotated head-up, all six legs in view */
 .ph{position:relative}
 .ph img{display:block;width:100%;height:auto;border-radius:4px}
-.ph .tag{position:absolute;left:61.5%;top:47.2%;height:9%;right:-10%;display:flex;align-items:center;padding:0 .65em;background:var(--red);color:#fff;font:800 clamp(.7rem,1.6vw,.95rem)/1 var(--f-head);border-radius:6px;transform:rotate(-2deg);white-space:nowrap;box-shadow:0 3px 0 rgba(61,37,17,.22)}
 .photo{margin:0 auto;width:min(100%,320px);background:#fff;padding:10px 10px 0;border-radius:10px;box-shadow:0 18px 30px rgba(61,37,17,.25);transform:rotate(2deg)}
 .photo figcaption{font-size:.8rem;font-weight:700;color:var(--muted);padding:9px 2px 11px;text-align:center}
 @media (max-width:760px){ .hero .wrap{grid-template-columns:1fr} .hero .art{order:-1} .photo{width:min(46%,175px)} }
@@ -125,6 +124,10 @@ section{padding-block:clamp(56px,9vw,104px)}
 .card{background:var(--paper);border-radius:16px;padding:16px;font-size:.98rem}
 .card .i{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;color:#fff;font:800 1.1rem/1 var(--f-head);margin-bottom:10px}
 .alike{margin-top:14px;background:var(--paper);border-left:6px solid var(--teal-ink);border-radius:12px;padding:14px 16px;font-size:1rem}
+.inat{margin-top:12px;display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;justify-content:space-between;background:#E8F4F2;border-radius:16px;padding:14px 16px}
+.inat p{flex:1 1 260px;font-size:1rem}
+.inat b{color:var(--teal-ink)}
+.inat .btn{padding:.75em 1.1em;font-size:.95rem;background:#fff}
 @media (max-width:900px){ .cards{grid-template-columns:1fr} }
 @media (max-width:760px){ .what .wrap{grid-template-columns:1fr} .idfig{max-width:330px;margin:0 auto} }
 
@@ -351,8 +354,7 @@ footer .fine{flex-basis:100%;font-size:.8rem;opacity:.8}
     <div class="art">
       <figure class="photo">
         <div class="ph">
-          <img src="assets/chirimacha.jpg" width="469" height="788" alt="⟦Chirimacha adulta (Triatoma infestans) vista desde arriba, sobre fondo amarillo||Adult chirimacha (Triatoma infestans) seen from above, on a yellow background⟧">
-          <span class="tag" aria-hidden="true">⟦Chirimacha adulta||Adult chirimacha⟧</span>
+          <img src="assets/chirimacha.jpg" width="580" height="884" alt="⟦Chirimacha adulta (Triatoma infestans) vista desde arriba, con sus seis patas, sobre fondo amarillo||Adult chirimacha (Triatoma infestans) seen from above, with all six legs, on a yellow background⟧">
         </div>
         <figcaption>⟦<i>Triatoma infestans</i> · Foto: Alerta Chirimacha||<i>Triatoma infestans</i> · Photo: Alerta Chirimacha⟧</figcaption>
       </figure>
@@ -389,12 +391,11 @@ footer .fine{flex-basis:100%;font-size:.8rem;opacity:.8}
   <div class="wrap">
     <figure class="idfig">
       <div class="ph">
-        <img src="assets/chirimacha.jpg" width="469" height="788" loading="lazy" alt="⟦La misma chirimacha con números sobre la cabeza, una antena, el cuerpo y el borde con franjas||The same chirimacha with numbers on the head, an antenna, the body and the striped edge⟧">
-        <span class="tag" aria-hidden="true">⟦Adulta||Adult⟧</span>
-        <span class="mk" style="left:40.9%;top:19%" aria-hidden="true">1</span>
-        <span class="mk" style="left:31.8%;top:6.4%" aria-hidden="true">2</span>
-        <span class="mk" style="left:39.4%;top:59.6%" aria-hidden="true">3</span>
-        <span class="mk" style="left:14.9%;top:71.1%" aria-hidden="true">4</span>
+        <img src="assets/chirimacha.jpg" width="580" height="884" loading="lazy" alt="⟦La misma chirimacha con números sobre la cabeza, una antena, el cuerpo y el borde con franjas||The same chirimacha with numbers on the head, an antenna, the body and the striped edge⟧">
+        <span class="mk" style="left:50.2%;top:24.3%" aria-hidden="true">1</span>
+        <span class="mk" style="left:62.6%;top:8.5%" aria-hidden="true">2</span>
+        <span class="mk" style="left:49.3%;top:39.6%" aria-hidden="true">3</span>
+        <span class="mk" style="left:69.5%;top:72.4%" aria-hidden="true">4</span>
       </div>
       <figcaption>⟦Adulta, vista desde arriba. Foto: Alerta Chirimacha||Adult, seen from above. Photo: Alerta Chirimacha⟧</figcaption>
     </figure>
@@ -414,6 +415,10 @@ footer .fine{flex-basis:100%;font-size:.8rem;opacity:.8}
         <div class="card"><span class="i" style="background:var(--teal-ink)" aria-hidden="true">✦</span><p>⟦Las crías no tienen alas y son más pequeñas; pasan por cinco etapas antes de ser adultas. También son chirimachas: repórtalas igual.||The young have no wings and are smaller; they go through five stages before becoming adults. They are chirimachas too: report them the same way.⟧</p></div>
       </div>
       <p class="alike">⟦<b>Hay insectos parecidos</b>, como las chinches de cama, otras chinches y algunos escarabajos. Si no estás seguro, envíanos la foto: el equipo te dirá qué es.||<b>Some insects look similar</b>, like bed bugs, other true bugs and some beetles. If you're not sure, send us the photo: the team will tell you what it is.⟧</p>
+      <div class="inat">
+        <p>⟦<b>¿Será una chirimacha?</b> Compara tu insecto con fotos reales de chirimachas en iNaturalist.||<b>Is it a chirimacha?</b> Compare your insect with real photos of chirimachas on iNaturalist.⟧</p>
+        <a class="btn btn-line" href="https://www.inaturalist.org/observations?subview=grid&amp;user_id=lauratamayo&amp;verifiable=any" target="_blank" rel="noopener">⟦Ver fotos en iNaturalist||See photos on iNaturalist⟧ <span aria-hidden="true">↗</span></a>
+      </div>
       <p class="srcline">⟦Fuentes: el video de Alerta Chirimacha (más abajo) y la guía <a href="https://kissingbug.tamu.edu/found-a-bug/" target="_blank" rel="noopener">«Found a bug?»</a> de Texas A&amp;M. Insectos parecidos: registro de reportes del equipo.||Sources: the Alerta Chirimacha video (below) and Texas A&amp;M's <a href="https://kissingbug.tamu.edu/found-a-bug/" target="_blank" rel="noopener">“Found a bug?”</a> guide. Look-alikes: the team's report log.⟧</p>
     </div>
   </div>
@@ -469,7 +474,7 @@ footer .fine{flex-basis:100%;font-size:.8rem;opacity:.8}
     </div>
     <div class="privacy"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z" fill="none" stroke="#24706A" stroke-width="2"/><path d="M8.5 12l2.5 2.5 4.5-5" fill="none" stroke="#24706A" stroke-width="2" stroke-linecap="round"/></svg>
       <p>⟦<b>Tu privacidad:</b> solo mostramos totales por distrito. Nunca mostramos casas, direcciones ni nombres. Cada círculo está en la zona urbana de su distrito, no en una casa.||<b>Your privacy:</b> we only show totals by district. We never show homes, addresses or names. Each circle sits in the built-up area of its district, not on a home.⟧</p></div>
-    <p class="datanote">⟦<b>Sobre los datos.</b> Reportes recibidos por Alerta Chirimacha por WhatsApp, teléfono y establecimientos de salud. Un reporte no siempre es una chirimacha: el equipo revisa cada foto, y «confirmadas» son las que identificó como <i>Triatoma infestans</i>. Los @@N_OUT@@ reportes de otras provincias, de otras regiones o sin distrito no están en el mapa. <mark class="tbc" title="Por confirmar con el equipo">Datos reales del equipo: confirmar antes de publicar.</mark>||<b>About the data.</b> Reports received by Alerta Chirimacha on WhatsApp, by phone and at health facilities. A report is not always a chirimacha: the team checks every photo, and “confirmed” means the team identified it as <i>Triatoma infestans</i>. The @@N_OUT@@ reports from other provinces, other regions or with no district are not on the map. <mark class="tbc" title="To confirm with the team">Real team data: confirm before publishing.</mark>⟧</p>
+    <p class="datanote">⟦<b>Sobre los datos.</b> Datos al @@UPD_ES@@. Reportes recibidos por Alerta Chirimacha por WhatsApp, teléfono y establecimientos de salud. Un reporte no siempre es una chirimacha: el equipo revisa cada foto, y «confirmadas» son las que identificó como <i>Triatoma infestans</i>. Los @@N_OUT@@ reportes de otras provincias, de otras regiones o sin distrito no están en el mapa. <mark class="tbc" title="Por confirmar con el equipo">Datos reales del equipo: confirmar antes de publicar.</mark>||<b>About the data.</b> Data as of @@UPD_EN@@. Reports received by Alerta Chirimacha on WhatsApp, by phone and at health facilities. A report is not always a chirimacha: the team checks every photo, and “confirmed” means the team identified it as <i>Triatoma infestans</i>. The @@N_OUT@@ reports from other provinces, other regions or with no district are not on the map. <mark class="tbc" title="To confirm with the team">Real team data: confirm before publishing.</mark>⟧</p>
     <details class="tbl">
       <summary>⟦Ver como tabla||View as a table⟧</summary>
       <table>
@@ -478,7 +483,7 @@ footer .fine{flex-basis:100%;font-size:.8rem;opacity:.8}
         <tbody>@@TABLE_ROWS@@</tbody>
       </table>
     </details>
-    <p class="mattr">⟦Mapa: límites distritales del <a href="https://ide.inei.gob.pe/" target="_blank" rel="noopener">INEI</a> (vía <a href="https://github.com/PaulESantos/perugeopkg" target="_blank" rel="noopener">perugeopkg</a>, CC BY-SA 4.0) · calles, ríos y zona urbana © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">colaboradores de OpenStreetMap</a> · relieve: <a href="https://registry.opendata.aws/terrain-tiles/" target="_blank" rel="noopener">Terrain Tiles</a> (datos SRTM).||Map: district boundaries from <a href="https://ide.inei.gob.pe/" target="_blank" rel="noopener">INEI</a> (via <a href="https://github.com/PaulESantos/perugeopkg" target="_blank" rel="noopener">perugeopkg</a>, CC BY-SA 4.0) · streets, rivers and built-up area © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a> · terrain: <a href="https://registry.opendata.aws/terrain-tiles/" target="_blank" rel="noopener">Terrain Tiles</a> (SRTM data).⟧</p>
+    <p class="mattr">⟦Mapa: límites distritales del <a href="https://ide.inei.gob.pe/" target="_blank" rel="noopener">INEI</a> (vía <a href="https://github.com/PaulESantos/perugeopkg" target="_blank" rel="noopener">perugeopkg</a>, CC BY-SA 4.0) · calles, ríos y zona urbana © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">colaboradores de OpenStreetMap</a> · relieve: <a href="https://registry.opendata.aws/terrain-tiles/" target="_blank" rel="noopener">Terrain Tiles</a> (datos SRTM). También puedes ver las observaciones en el <a href="https://www.inaturalist.org/observations?subview=map&amp;user_id=lauratamayo&amp;verifiable=any" target="_blank" rel="noopener">mapa de iNaturalist ↗</a>.||Map: district boundaries from <a href="https://ide.inei.gob.pe/" target="_blank" rel="noopener">INEI</a> (via <a href="https://github.com/PaulESantos/perugeopkg" target="_blank" rel="noopener">perugeopkg</a>, CC BY-SA 4.0) · streets, rivers and built-up area © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a> · terrain: <a href="https://registry.opendata.aws/terrain-tiles/" target="_blank" rel="noopener">Terrain Tiles</a> (SRTM data). You can also see the observations on the <a href="https://www.inaturalist.org/observations?subview=map&amp;user_id=lauratamayo&amp;verifiable=any" target="_blank" rel="noopener">iNaturalist map ↗</a>.⟧</p>
   </div>
 </section>
 
@@ -532,6 +537,7 @@ footer .fine{flex-basis:100%;font-size:.8rem;opacity:.8}
       <details><summary>⟦¿Tengo que descargar una aplicación?||Do I need to download an app?⟧</summary><p>⟦No. Solo necesitas WhatsApp.||No. You only need WhatsApp.⟧</p></details>
       <details><summary>⟦¿Van a publicar mi nombre o mi dirección?||Will you publish my name or address?⟧</summary><p>⟦No. En este sitio solo mostramos totales por distrito.||No. This site only shows totals by district.⟧</p></details>
       <details><summary>⟦¿Y si no es una chirimacha?||What if it isn't a chirimacha?⟧</summary><p>⟦Igual te respondemos. La mayoría de los reportes no son chirimachas, y preferimos revisar.||We still reply. Most reports are not chirimachas, and we would rather check.⟧</p></details>
+      <details><summary>⟦¿Cómo sé si es una chirimacha?||How do I know if it's a chirimacha?⟧</summary><p>⟦Fíjate en las cuatro señales de <a href="#chirimacha">Reconócela</a> y compara tu insecto con las <a href="https://www.inaturalist.org/observations?subview=grid&amp;user_id=lauratamayo&amp;verifiable=any" target="_blank" rel="noopener">fotos en iNaturalist</a>. Si no estás seguro, envíanos la foto: el equipo te dirá qué es.||Check the four signs in <a href="#chirimacha">Recognize it</a> and compare your insect with the <a href="https://www.inaturalist.org/observations?subview=grid&amp;user_id=lauratamayo&amp;verifiable=any" target="_blank" rel="noopener">photos on iNaturalist</a>. If you're not sure, send us the photo: the team will tell you what it is.⟧</p></details>
       <details><summary>⟦¿Qué hago si la aplasté?||What if I squashed it?⟧</summary><p>⟦<mark class="tbc" title="Por confirmar con el equipo">No la toques con las manos. Recógela con una bolsa y limpia el lugar con lejía, siguiendo las indicaciones de la etiqueta.</mark> Igual puedes tomarle una foto y enviarla.||<mark class="tbc" title="To confirm with the team">Don't touch it with bare hands. Pick it up with a bag and clean the spot with bleach, following the label.</mark> You can still take a photo and send it.⟧</p></details>
       <details><summary>⟦¿Qué hago si me picó?||What should I do if it bit me?⟧</summary><p>⟦<mark class="tbc" title="Por confirmar con el equipo">Acude a tu establecimiento de salud más cercano. Si puedes, lleva el insecto en un frasco cerrado.</mark>||<mark class="tbc" title="To confirm with the team">Go to your nearest health facility. If you can, bring the insect in a closed jar.</mark>⟧</p></details>
     </div>
@@ -555,6 +561,7 @@ footer .fine{flex-basis:100%;font-size:.8rem;opacity:.8}
       <ul class="sources">
         <li>⟦Kissing Bug Community Science Program, Texas A&amp;M: <a href="https://kissingbug.tamu.edu/found-a-bug/" target="_blank" rel="noopener">«Found a bug?» ↗</a> (pasos para atraparla y anotar datos).||Kissing Bug Community Science Program, Texas A&amp;M: <a href="https://kissingbug.tamu.edu/found-a-bug/" target="_blank" rel="noopener">“Found a bug?” ↗</a> (steps for catching it and taking notes).⟧</li>
         <li>⟦Foto, video y registro de reportes: Alerta Chirimacha.||Photo, video and report log: Alerta Chirimacha.⟧</li>
+        <li>⟦Fotos para comparar: <a href="https://www.inaturalist.org/observations?subview=grid&amp;user_id=lauratamayo&amp;verifiable=any" target="_blank" rel="noopener">observaciones en iNaturalist ↗</a>.||Photos to compare: <a href="https://www.inaturalist.org/observations?subview=grid&amp;user_id=lauratamayo&amp;verifiable=any" target="_blank" rel="noopener">observations on iNaturalist ↗</a>.⟧</li>
         <li>⟦Mapa: INEI, OpenStreetMap y Terrain Tiles (ver créditos debajo del mapa).||Map: INEI, OpenStreetMap and Terrain Tiles (see the credits under the map).⟧</li>
       </ul>
     </div>
@@ -680,7 +687,7 @@ let rT; window.addEventListener('resize', () => { clearTimeout(rT); rT = setTime
 
 /* ---------- map: data, year filter, selection ---------- */
 const by = Object.fromEntries(DATA.districts.map(x => [x.d, x]));
-const YEARS = DATA.years, S = DATA.summary;
+let YEARS = DATA.years, S = DATA.summary;
 let YEAR = 'all', SEL = null;
 const MES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
 const MEN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -736,6 +743,43 @@ $('#yearSel').addEventListener('change', e => { YEAR = e.target.value === 'all' 
 updateBubbles(); updateTable();
 subs.push(render, updateBubbles); render();
 requestAnimationFrame(() => apply(V[VIEW]));
+
+/* ---------- live numbers from the Google Sheet (tools/apps-script); only district totals arrive ---------- */
+const dayFmt = (iso, l) => {   // a timestamp is shown as the viewer's local date
+  const t = iso.length > 10 ? new Date(iso) : null, ok = t && !isNaN(t);
+  const [y, m, d] = ok ? [t.getFullYear(), t.getMonth() + 1, t.getDate()] : iso.slice(0, 10).split('-').map(Number);
+  return l === 'en' ? MEN[m - 1] + ' ' + d + ', ' + y : d + ' de ' + MES[m - 1] + ' de ' + y;
+};
+const setLive = (k, v) => $$('[data-live="' + k + '"]').forEach(e => { e.textContent = v; });
+function applyLive(d){
+  const okDate = s => typeof s === 'string' && /^\d{4}-\d{2}-\d{2}/.test(s);
+  if(!d || d.version !== 1 || typeof d.reports_total !== 'number' || !d.districts || !okDate(d.first_report) || !okDate(d.last_report)) return;
+  DATA.districts.forEach(x => { const src = d.districts[x.d] || {}; x.y = {}; Object.keys(src).forEach(k => { const v = src[k]; if(Array.isArray(v) && /^\d{4}$/.test(k)) x.y[k] = [Math.max(0, +v[0] || 0), Math.max(0, +v[1] || 0)]; }); });
+  const tot = x => Object.values(x.y).reduce((a, v) => [a[0] + v[0], a[1] + v[1]], [0, 0]);
+  const ys = new Set(); DATA.districts.forEach(x => Object.keys(x.y).forEach(k => ys.add(+k)));
+  if(!ys.size) return;
+  YEARS = DATA.years = [...ys].sort((a, b) => a - b);
+  const prov = DATA.districts.reduce((a, x) => a + tot(x)[0], 0), kprov = DATA.districts.reduce((a, x) => a + tot(x)[1], 0);
+  DATA.nmax = Math.max(1, ...DATA.districts.map(x => tot(x)[0]));
+  S = DATA.summary = {all: d.reports_total, province: prov, outside: d.reports_total - prov, first: d.first_report, last: d.last_report, generated: d.generated || ''};
+  setLive('n_all', d.reports_total); setLive('n_prov', prov); setLive('k_prov', kprov); setLive('n_out', d.reports_total - prov);
+  setLive('n_ident', +d.identified_by_team || 0); setLive('k_all', +((d.triatoma_infestans || {}).total) || 0);
+  setLive('from_es', ym(d.first_report, 'es')); setLive('from_en', ym(d.first_report, 'en'));
+  setLive('to_es', ym(d.last_report, 'es')); setLive('to_en', ym(d.last_report, 'en'));
+  if(okDate(d.generated)){ setLive('upd_es', dayFmt(d.generated, 'es')); setLive('upd_en', dayFmt(d.generated, 'en')); }
+  const sel = $('#yearSel'), keep = sel.value, all = sel.querySelector('option[value="all"]'), y0 = YEARS[0], y1 = YEARS[YEARS.length - 1];
+  all.setAttribute('data-es', 'Todos (' + y0 + '–' + y1 + ')'); all.setAttribute('data-en', 'All (' + y0 + '–' + y1 + ')');
+  all.textContent = all.getAttribute(LANG === 'en' ? 'data-en' : 'data-es');
+  [...sel.querySelectorAll('option:not([value="all"])')].forEach(o => o.remove());
+  YEARS.slice().reverse().forEach(y => { const o = document.createElement('option'); o.value = String(y); o.textContent = String(y); sel.appendChild(o); });
+  sel.value = YEARS.includes(+keep) ? keep : 'all'; YEAR = sel.value === 'all' ? 'all' : +sel.value;
+  updateBubbles(); updateTable(); render();
+  root.classList.add('live-data');
+}
+if(DATA.live){
+  const ctl = 'AbortController' in window ? new AbortController() : null, timer = setTimeout(() => { if(ctl) ctl.abort(); }, 10000);
+  fetch(DATA.live, {cache: 'no-store', signal: ctl ? ctl.signal : undefined}).then(r => r.ok ? r.json() : null).then(applyLive).catch(() => {}).finally(() => clearTimeout(timer));
+}
 
 /* ---------- video chapters ---------- */
 const vid = $('#vid'), chap = $$('.chapters button'), starts = chap.map(b => +b.dataset.t);

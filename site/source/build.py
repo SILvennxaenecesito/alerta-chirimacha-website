@@ -5,10 +5,10 @@ Run from this folder:
 
 What it does
   1. Reads ../data/districts.csv (the 29 districts of Arequipa province, map
-     labels and INEI ubigeo codes) and the report counts made by
-     tools/aggregate_reports.py:
-       ../data/reports-by-district.csv   district, year, reports, confirmed
-       ../data/reports-summary.json      date range and totals
+     labels and INEI ubigeo codes), ../data/reports.json (district totals by
+     year, made by tools/aggregate_reports.py or the Google Sheet script) and
+     ../data/live.json (address of the Google Sheet script, if set up; the
+     page then refreshes its numbers from the sheet on every visit).
   2. Draws the map (mapdraw.py: city view and province view, from the layers
      in ../data/map/) and the table, and fills the @@PLACEHOLDERS@@ in the
      template.
@@ -50,17 +50,28 @@ def load(data_dir):
     districts = read_csv(os.path.join(data_dir, 'districts.csv'))
     names = [d['district'] for d in districts]
     assert len(names) == 29 and len(set(names)) == 29, 'expected the 29 districts of Arequipa province'
-    years = defaultdict(dict)
-    for r in read_csv(os.path.join(data_dir, 'reports-by-district.csv')):
-        assert r['district'] in names, f'unknown district {r["district"]!r}'
-        years[r['district']][int(r['year'])] = [int(r['reports']), int(r['confirmed'])]
-    summary = json.load(open(os.path.join(data_dir, 'reports-summary.json'), encoding='utf-8'))
-    return districts, years, summary
+    rep = json.load(open(os.path.join(data_dir, 'reports.json'), encoding='utf-8'))
+    assert rep.get('version') == 1, 'reports.json: unknown format'
+    assert set(rep['districts']) == set(names), 'reports.json: district names do not match districts.csv'
+    years = {d: {int(y): v for y, v in rep['districts'][d].items()} for d in names}
+    live = json.load(open(os.path.join(data_dir, 'live.json'), encoding='utf-8')).get('url', '').strip()
+    assert not live or live.startswith('https://script.google.com/'), 'live.json: expected an Apps Script web app URL'
+    return districts, years, rep, live
 
 
 def month(iso, lang):
-    d = date.fromisoformat(iso)
+    d = date.fromisoformat(iso[:10])
     return f'{MONTHS_ES[d.month - 1]} de {d.year}' if lang == 'es' else f'{MONTHS_EN[d.month - 1]} {d.year}'
+
+
+def day(iso, lang):
+    d = date.fromisoformat(iso[:10])
+    return f'{d.day} de {MONTHS_ES[d.month - 1]} de {d.year}' if lang == 'es' else f'{MONTHS_EN[d.month - 1]} {d.day}, {d.year}'
+
+
+def live(key, value):
+    """Numbers and dates the page script refreshes when live data arrives from the Google Sheet."""
+    return f'<span data-live="{key}">{value}</span>'
 
 
 def table_rows(districts, totals):
@@ -92,23 +103,24 @@ def expand(s):
 
 def main():
     src, data_dir, out = sys.argv[1], sys.argv[2], sys.argv[3]
-    districts, years, summary = load(data_dir)
+    districts, years, rep, live_url = load(data_dir)
     totals = {d['district']: [sum(v[0] for v in years[d['district']].values()),
                               sum(v[1] for v in years[d['district']].values())] for d in districts}
     labels = {d['district']: d['label'] for d in districts}
     city_svg, prov_svg, meta = build_map(os.path.join(data_dir, 'map'), totals, labels)
 
-    all_years = sorted(int(y) for y in summary['province_reports_by_year'])
+    all_years = sorted({y for d in years.values() for y in d})
     n_prov = sum(n for n, _ in totals.values())
     k_prov = sum(k for _, k in totals.values())
-    assert n_prov == summary['by_place']['province'], 'district totals do not match the summary'
-    n_all = summary['reports_total']
+    assert n_prov == rep['by_place'].get('province', 0), 'district totals do not match the summary'
+    n_all = rep['reports_total']
     data = {
         'years': all_years,
         'nmax': meta['nmax'], 'rmax': meta['rmax'], 'badge': meta['badge'], 'views': meta['views'],
         'districts': [{'d': d['district'], 'u': d['ubigeo'], 'y': years[d['district']]} for d in districts],
         'summary': {'all': n_all, 'province': n_prov, 'outside': n_all - n_prov,
-                    'first': summary['first_report'], 'last': summary['last_report']},
+                    'first': rep['first_report'], 'last': rep['last_report'], 'generated': rep['generated']},
+        'live': live_url,
     }
     year_opts = ''.join(f'<option value="{y}">{y}</option>' for y in reversed(all_years))
     fills = {
@@ -117,16 +129,18 @@ def main():
         '@@TABLE_ROWS@@': table_rows(districts, totals),
         '@@DATA_JSON@@': json.dumps(data, ensure_ascii=False, separators=(',', ':')),
         '@@YEAR_OPTIONS@@': year_opts,
-        '@@N_PROV@@': str(n_prov),
-        '@@K_PROV@@': str(k_prov),
-        '@@N_ALL@@': str(n_all),
-        '@@N_OUT@@': str(n_all - n_prov),
-        '@@N_IDENT@@': str(summary['identified_by_team']),
-        '@@K_ALL@@': str(summary['triatoma_infestans']['total']),
-        '@@FROM_ES@@': month(summary['first_report'], 'es'),
-        '@@FROM_EN@@': month(summary['first_report'], 'en'),
-        '@@TO_ES@@': month(summary['last_report'], 'es'),
-        '@@TO_EN@@': month(summary['last_report'], 'en'),
+        '@@N_PROV@@': live('n_prov', n_prov),
+        '@@K_PROV@@': live('k_prov', k_prov),
+        '@@N_ALL@@': live('n_all', n_all),
+        '@@N_OUT@@': live('n_out', n_all - n_prov),
+        '@@N_IDENT@@': live('n_ident', rep['identified_by_team']),
+        '@@K_ALL@@': live('k_all', rep['triatoma_infestans']['total']),
+        '@@FROM_ES@@': live('from_es', month(rep['first_report'], 'es')),
+        '@@FROM_EN@@': live('from_en', month(rep['first_report'], 'en')),
+        '@@TO_ES@@': live('to_es', month(rep['last_report'], 'es')),
+        '@@TO_EN@@': live('to_en', month(rep['last_report'], 'en')),
+        '@@UPD_ES@@': live('upd_es', day(rep['generated'], 'es')),
+        '@@UPD_EN@@': live('upd_en', day(rep['generated'], 'en')),
         '@@Y0@@': str(all_years[0]), '@@Y1@@': str(all_years[-1]),
     }
     s = open(src, encoding='utf-8').read()
@@ -136,7 +150,8 @@ def main():
     s = expand(s)
     assert '@@' not in s, 'unfilled placeholder: ' + re.search(r'@@\w+@@', s)[0]
     open(out, 'w', encoding='utf-8').write(s)
-    print(len(s) // 1024, 'KB  map:', len(city_svg) // 1024, 'KB city +', len(prov_svg) // 1024, 'KB province')
+    print(len(s) // 1024, 'KB  map:', len(city_svg) // 1024, 'KB city +', len(prov_svg) // 1024, 'KB province',
+          '| live data:', live_url or 'not set (snapshot only)')
 
 
 if __name__ == '__main__':
