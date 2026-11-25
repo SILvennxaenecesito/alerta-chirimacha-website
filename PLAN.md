@@ -74,14 +74,14 @@ Not chosen: the lab's own georeferences (very few reports have localities) and a
 
 - One HTML page (about 270 KB, of which the map is 190 KB) plus the photo (100 KB) and the video (7 MB, loaded only when played). No server of our own, no database, no tracking. The live numbers come from the Apps Script on Google's servers.
 - Source: `site/source/template.html` (bilingual text as `⟦Español||English⟧`), `site/source/build.py` and `site/source/mapdraw.py`. The build needs only Python.
-- Hosting options are the same as for the lab site: GitHub Pages, a Penn alias, or a domain the lab owns. This is not decided yet. At launch: remove the draft banner and the `noindex` tag, and add the site's address to the Facebook page. The video could also live on YouTube or Facebook to save bandwidth.
+- Hosting options are the same as for the lab site: GitHub Pages, a Penn alias, or a domain the lab owns. This is not decided yet. At launch: remove the footer's draft note and the `noindex` tag (the top banner is already gone), and add the site's address to the Facebook page. The video could also live on YouTube or Facebook to save bandwidth.
 
 ## Phases
 
 1. **Draft v1:** structure, Spanish and English copy, sample map.
 2. **Drafts v2 and v3 (this pull request):** real photo, real map with the team's counts, video with chapters, steps and identification guide adapted from Texas A&M. v3: the whole insect in both photos, iNaturalist links, live numbers from the team's Google Sheet.
 3. **Team review:** confirm the counting rules and publishing the counts, the safety wording, credits for the photo and video, partner names. Spanish review by native speakers; test on low-end Android phones.
-4. **Launch:** hosting decision; remove the draft banner after approval; link from the Facebook page.
+4. **Launch:** hosting decision; after approval, remove the footer's draft note and the `noindex` tag; link from the Facebook page.
 5. **Later:** photos of reported insects that are not dangerous; a Texas version if Alerta Chirimacha starts there.
 
 ## Open questions for the team
