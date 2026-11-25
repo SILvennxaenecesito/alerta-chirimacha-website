@@ -1,15 +1,24 @@
 # Alerta Chirimacha website
 
-Draft website for Alerta Chirimacha, the community surveillance system for chirimachas (*Triatoma infestans*) in Arequipa, Peru. Residents report an insect by WhatsApp; the site also shows where reports come from on a map of the city and the province.
+Website for Alerta Chirimacha, the community surveillance system for chirimachas (*Triatoma infestans*) in Arequipa, Peru. Residents report an insect by WhatsApp; the site also shows where reports come from, on a map of the city and the province. Spanish first, with an English button.
 
-Everything here is a **draft for the team's review**, not the official site yet.
+This is a **draft for the Alerta Chirimacha team's review**, not the official site yet.
+
+![Report section: "¿Encontraste una chirimacha?" with the WhatsApp button and a photo of an adult chirimacha](docs/screenshots/1-report.jpg)
+
+| Recognize it | Reports by district |
+|---|---|
+| ![Photo of the chirimacha with numbered features, and a link to compare with photos on iNaturalist](docs/screenshots/2-recognize.jpg) | ![Map of Arequipa with circles sized by the number of reports in each district, and a panel with reports per year](docs/screenshots/3-map.jpg) |
+
+## Open the site
+
+1. On this page, click **Code → Download ZIP**, then unzip it.
+2. Open `site/index.html` in a browser. Keep the `site/` folder together: the page uses the photo in `assets/` and the video in `media/`.
+
+Spanish is the default; the EN button (or `?lang=en` at the end of the address) switches to English.
 
 - **Plan:** [PLAN.md](PLAN.md): audience, decisions, site map, data and privacy, the map, open questions.
 - **Context for anyone picking up the work:** [HANDOFF.md](HANDOFF.md).
-
-## View the draft
-
-Open `site/index.html` in a browser (keep the `site/` folder together: the page uses `assets/` and `media/`). Spanish is the default; the EN button (or `?lang=en` / `#en` at the end of the address) switches to English.
 
 ## Folders
 
@@ -22,6 +31,7 @@ Open `site/index.html` in a browser (keep the `site/` folder together: the page 
 - `site/data/map/`: the base map layers and their sources ([README](site/data/map/README.md)).
 - `site/assets/`, `site/media/`: the team's photo and video (web versions).
 - `tools/`: scripts that make the data files. `tools/apps-script/` has the Google Sheet script for live numbers.
+- `docs/screenshots/`: the pictures in this README.
 
 ## Rebuild
 
